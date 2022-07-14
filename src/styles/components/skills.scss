@@ -1,0 +1,39 @@
+
+.skills-set{
+    // width: 100%;
+    box-sizing: border-box;
+    // background: rgb(58, 58, 58);
+    background-image: url('../../media/background.gif');
+    // background: $dark-grey;
+    margin-top: 10rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.skill{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    // border: 2px solid white;
+
+    &-img{
+    width: 100px;
+    height: 100px;
+    transition: width 0.5s, height 0.5s;
+
+    &:hover{
+        width: 140px;
+        height: 140px;
+    }
+}
+}

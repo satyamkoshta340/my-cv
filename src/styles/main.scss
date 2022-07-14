@@ -1,0 +1,101 @@
+@import "./settings/reset.scss";
+@import "./settings/variables.scss";
+@import "./components/navbar.scss";
+@import "./components/skills.scss";
+@import "./components/footer.scss";
+@import "./components/home.scss";
+
+.main{
+  scroll-behavior: smooth;
+  position: relative;
+  // padding-bottom: 4rem;
+}
+
+.hover-element{
+    position: relative;
+    display: inline-block;
+  }
+  .hover-element:after{
+    background: $color;
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -10px;
+    left: 0;
+    // top: 5px;
+    transform-origin: bottom left;
+    transition: transform 0.4s;
+  }
+  .hover-element:hover:after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  .dark{
+    transition: background-color 0.2s ease-in-out;
+    background-color: black;
+    color: white;
+  }
+
+  .light{
+    transition: background-color 0.2s ease-in-out;
+    background-color: white;
+    color: black;
+  }
+
+.item-1-hovered{
+  transition: background-color 0.1s ease-in-out;
+  background-color: $dark-green;
+  color: white;
+}
+
+.item-2-hovered{
+  transition: background-color 0.1s ease-in-out;
+  background-color: $ruby;
+  color: white;
+}
+
+.item-3-hovered{
+  transition: background-color 0.1s ease-in-out;
+  background-color: $dark-yellow;
+  color: white;
+}
+
+
+
+@media (max-width: 576px){
+  .description{
+    font-size: 3rem;
+    margin-left: 2rem;
+  }
+
+  .items{
+    display: flex;
+    flex-direction: column;
+    height: 45rem;
+  }
+  .title{
+    display: none;
+  }
+  .options{
+    position: fixed;
+    right: 0 ;
+    padding-right: 3rem;
+  }
+  .item{
+    font-size: 1rem;
+  }
+}
+.main{
+  transition: 1s;
+  padding-bottom: 10rem;
+}
+
+.slide-left{
+  transform: translateX(-100%);
+}
+.slide-right{
+  transform: translateX(100%);
+}

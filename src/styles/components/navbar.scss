@@ -1,0 +1,38 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.3rem;
+    font-family: 'Oswald', sans-serif;
+    background: transparent;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+}
+
+
+.options{
+    max-width: 200px;
+    display: flex;
+    width: 25%;
+    justify-content: space-around;
+    font-size: 1.3rem;
+    background: none;
+    cursor: pointer;
+    padding-right: 2rem;
+  }
+
+
+.title{
+    font-size: 2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    background: none;
+    cursor: pointer;
+}
+
+a{
+    border: none;
+    text-decoration: none;
+    color: unset;
+  }
+

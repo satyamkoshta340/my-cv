@@ -1,0 +1,79 @@
+#home{
+    transition: 1.5s;
+}
+.description{
+    height: 19rem;
+    margin-left: 4rem;
+    padding-top: 14rem;
+    font-size: 5.5rem;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 900;
+    padding-bottom: 2rem;
+  }
+
+.item{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    background: $dark-grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    position: relative;
+    padding: 1rem;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.items{
+    height: 20rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+    box-sizing: border-box;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 5rem;
+  }
+
+.hobby-active {
+    background-image: url("../../media/home/hobby.png");
+}
+
+.education-active {
+    background-image: url("../../media/home/education.png");
+}
+
+.activities-active {
+    background-image: url("../../media/home/activities.png");
+}
+
+.points {
+    height: 2.5rem;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+
+li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.dynamic-text li span{
+    position: relative;
+}

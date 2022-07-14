@@ -1,0 +1,25 @@
+.about-page{
+    // background: red;
+    padding: 4rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    transition: 1.5s;
+    padding-top: 2rem;
+}
+p{
+    padding-top: 1rem;
+}
+.para-1{
+    margin-left: 20%;
+}
+
+.laptop{
+    background-image: url("../../media/about/about.png");
+    width: 100%;
+    height: 12rem;
+    background-size: 15rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 1.5rem;
+    // position: absolute;
+}
