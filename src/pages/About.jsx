@@ -7,6 +7,7 @@ import WordAnimation from '../components/WordAnimation';
 import { TbBrandCpp, TbBrandJavascript } from "react-icons/tb";
 import { FaPython, FaHtml5, FaCss3, FaSass, FaNode, FaReact, FaGit, FaAward, FaLinkedin } from "react-icons/fa";
 import { SiMongodb, SiMysql, SiPostgresql, SiPostman, SiRedux, SiLeetcode, SiHackerrank} from "react-icons/si";
+import satyamBackground from '../assets/satyam.jpeg';
 
 function About() {
   const containerRef = useRef(null);
@@ -38,7 +39,7 @@ function About() {
     <div>
         <div className='row align_center justify_center main_photo_container'>
           <div ref={containerRef} className="container">
-            <div ref={backgroundRef} className="background"></div>
+            <div ref={backgroundRef} className="background" style={{ backgroundImage: `url(${satyamBackground})`}}></div>
           </div>
           <div className='about_info'>
               {/* <span className='about_title'>Web Designer</span> */}
