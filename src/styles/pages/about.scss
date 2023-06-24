@@ -1,0 +1,199 @@
+.main_photo_container {
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+.container {
+  position: relative;
+  width: 19rem;
+  height: 19rem;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  margin-right: 4rem;
+  border-radius: 1000px;
+  border: 18px solid #444;
+  background-color: #444;
+  box-shadow: 0 0 25px 0 rgba(0,0,0,.8);
+}
+
+.background {
+  width: 105%;
+  height: 105%;
+  background-image: url("./../../../src/assets/satyam.jpeg");
+  background-size: contain;
+  background-position: center;
+  position: absolute;
+  left: -5px;
+  top: -3px;
+  background-repeat: no-repeat;
+}
+
+.about_info {
+  max-width: 40%;
+  p {
+    color: $primary-font;
+    font-size: 14px;
+  }
+  .about_title {
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+}
+
+.heading-box {
+  margin-bottom: 2rem;
+}
+
+.button-row {
+  gap: 2rem;
+  margin-top: 1rem;
+
+  button {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 40px;
+    border: 2px solid #aaa;
+  }
+  button:hover {
+    background-color: #aaa;
+    color: #444;
+    border-color: #aaa;
+  }
+  .button-main {
+    border-color: $primary;
+  }
+  .button-main:hover {
+    border-color: $primary;
+    background-color: $primary;
+    color: white;
+  }
+}
+
+.wid-blocks {
+  flex-wrap: wrap;
+}
+
+.wid-block {
+  width: 50%;
+  max-width: 50%;
+  margin-bottom: 1rem;
+}
+
+.wid-block-detail {
+  margin-left: 1.2rem;
+  box-sizing: border-box;
+
+  p {
+    margin-top: 0.4rem;
+    font-size: 0.9em;
+    padding-right: 1rem;
+  }
+}
+
+.skil-row {
+  font-size: 2.5rem;
+  color: #444;
+  gap: 5rem;
+  flex-wrap: wrap;
+  margin-left: 3rem;
+  margin-bottom: 3rem;
+}
+
+.skill-icon {
+  transition: color 0.4s;
+}
+.skill-icon:hover {
+  color: #fff;
+}
+
+.ff-item-container {
+  justify-content: space-between;
+}
+.ff-icon {
+  color: $primary;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.ff-item {
+  width: 23%;
+  height: 12rem;
+  background-color: #333;
+  border: 2px solid #444;
+  border-radius: 10px;
+  box-shadow: none;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  span {
+    font-size: 4rem;
+    line-height: 1;
+  }
+}
+
+.ff-item:hover {
+  transform: translateY(-10px);
+}
+
+@media screen and (max-width: 776px) {
+  .main_photo_container {
+    flex-direction: column;
+    margin-top: 2rem;
+  }
+
+  .container {
+    width: 14rem;
+    height: 14rem;
+    margin-right: 0rem;
+  }
+  .about_info {
+    max-width: 85%;
+    word-break: keep-all;
+    h1{
+        text-align: center;
+        font-size: 35px;
+    }
+  }
+  .ff-item-container{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .ff-item{
+    width: 15rem;
+  }
+
+  .button-row{
+    gap: 1rem;
+    button{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+  }
+
+  .wid-block {
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+  }
+  .wid-block-detail{
+    p {
+        padding-right: 0rem;
+        word-break: keep-all;
+    }
+  }
+  .skil-row {
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    margin-left: 0rem;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,42 @@
+@import './variables.scss';
+@import './components/header.scss';
+@import './pages/about.scss';
+@import './components/footer.scss';
+@import './components/wordanimation.scss';
+
+.row{
+    display: flex;
+}
+.align_center{
+    align-items: center;
+}
+.justify_center{
+    justify-content: center;
+}
+h1, h3, h4{
+    margin: 0;
+    padding: 0;
+}
+.underline-heading::after{
+    display: block;
+    position: absolute;
+    content: '';
+    width: 30px;
+    background-color: #007ced;
+    height: 3px;
+    bottom: 0;
+}
+.underline-heading::before{
+    display: block;
+    position: absolute;
+    content: '';
+    width: 100%;
+    background-color: #353535;
+    height: 3px;
+    bottom: 0;
+    z-index: 0;
+}
+.heading-box{
+    position: relative;
+    width: fit-content;
+}

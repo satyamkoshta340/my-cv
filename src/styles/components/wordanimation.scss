@@ -1,0 +1,40 @@
+.animation-container {
+    position: relative;
+    min-height: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .word {
+    display: inline-block;
+    font-size: 16px;
+    color: #aaa;
+    font-weight: 300;
+    border-right: 1px solid #aaa;
+    animation: blinkCursor 1s infinite;
+    box-sizing: border-box;
+  }
+  
+  
+  @keyframes blinkCursor {
+    0% {
+        border-color: #aaa;
+    }
+    50% {
+      border-color: #aaaaaa00;
+    }
+    100% {
+        border-color: #aaa;
+    }
+  }
+  
+
+@media screen and (max-width: 776px) {
+  .animation-container{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2rem;
+    
+  }
+}

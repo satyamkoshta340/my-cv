@@ -1,0 +1,30 @@
+.main {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  width: 1240px;
+  max-width: 1240px;
+  margin: 3% auto;
+  padding: 40px 70px 140px;
+  background-color: #222;
+  -webkit-box-shadow: 0 0 40px -10px rgba(0,0,0,.2);
+  -moz-box-shadow: 0 0 40px -10px rgba(0,0,0,.2);
+  box-shadow: 0 0 40px -10px rgba(0,0,0,.2);
+  border-radius: 40px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 776px) {
+  .main {
+    margin: 0;
+    border-radius: 0;
+    padding: 10px 20px 140px;
+    width: 100%;
+  }
+}
