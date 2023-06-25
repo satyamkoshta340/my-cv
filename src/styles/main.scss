@@ -3,6 +3,8 @@
 @import './pages/about.scss';
 @import './components/footer.scss';
 @import './components/wordanimation.scss';
+@import './pages/resume.scss';
+@import './components/skillblock.scss';
 
 .row{
     display: flex;
@@ -13,7 +15,10 @@
 .justify_center{
     justify-content: center;
 }
-h1, h3, h4{
+.justify-between{
+    justify-content: space-between;
+}
+h1, h3, h4, h5{
     margin: 0;
     padding: 0;
 }

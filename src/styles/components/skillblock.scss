@@ -1,0 +1,37 @@
+
+.skills-container{
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.skill-item{
+    width: 48.5%;
+    span{
+        font-size: 11px;
+        color: $secondary;
+    }
+    margin-bottom: 10px;
+}
+.skill-item-graph{
+    margin-top: 0;
+    width: 100%;
+    border: 2px solid $detail-bar;
+    min-height: 3px;
+    border-radius: 50px;
+    padding: 2px;
+    box-sizing: border-box;
+}
+.skil-item-power{
+    background-color: $primary;
+    min-height: 5px;
+    border-radius: 50px;
+}
+
+@media screen and (max-width: 776px) {
+
+    .skill-item{
+        width: 100%;
+    }
+
+}
