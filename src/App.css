@@ -18,6 +18,7 @@
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   box-sizing: border-box;
+  transition: transform 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 776px) {
@@ -28,3 +29,16 @@
     width: 100%;
   }
 }
+
+.page.tilted {
+  animation: animName 1s ease-in-out;
+}
+
+@keyframes animName {
+  0%{
+     transform: rotate3d(1, 0, 0, 90deg);
+    }
+ 100%{
+     transform: rotate3d(1, 0, 0, 0deg);
+    }
+ }
