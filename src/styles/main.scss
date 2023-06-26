@@ -5,9 +5,14 @@
 @import './components/wordanimation.scss';
 @import './pages/resume.scss';
 @import './components/skillblock.scss';
+@import './pages/contact.scss';
 
 .row{
     display: flex;
+}
+.col{
+    display: flex;
+    flex-direction: column;
 }
 .align_center{
     align-items: center;
