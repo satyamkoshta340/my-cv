@@ -27,6 +27,41 @@
     font-weight: 400;
     cursor: pointer;
   }
+  .nav-button{
+    float: right;
+    width: 2rem;
+    height: 1.5rem;
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 10px;
+    position: relative;
+    div{
+      min-width: 100%;
+      min-height: 4px;
+      background-color: $gray;
+      transition: all 1s;
+    }
+    
+  }
+  .first.active{
+    transform: rotateZ(-45deg);
+    transform-origin: right;
+    position: absolute;
+    bottom: 1.5rem;
+    background-color: red;
+  }
+  .second.active{
+    opacity: 0;
+  }
+  .third.active{
+    transform: rotateZ(45deg);
+    transform-origin: right;
+    position: absolute;
+    top: 1.5rem;
+    background-color: red;
+  }
   
   .main_nav{
     float: right;
@@ -35,6 +70,7 @@
     padding: 0;
     z-index: 99;
     display: flex;
+    transition: all 1s;
   }
   
   .header{
@@ -42,8 +78,13 @@
     line-height: 50px;
     font-size: 16px;
     justify-content: space-between;
+    position: relative;
+    overflow: hidden;
   }
   
+  .header.active{
+    overflow: visible;
+  }
   .main_nav_item{ 
     font-weight: 500;
     font-style: normal;
@@ -67,10 +108,11 @@
   .current_item{
     opacity: 1;
   }
-
+  
   @media screen and (max-width: 776px) {
     .main_nav{
-      display: none;
+      position: absolute;
+      transform: translateX(110vw);
     }
     .logo_symbol {
       line-height: 38px;
@@ -81,5 +123,29 @@
     .logo_text {
       line-height: 45px;
       font-size: 18px;
+    }
+    .main_nav_item_last{
+      margin-left: 5px;
+    }
+    .header{
+      width: 100vw;
+    }
+    .nav-button{
+      display: flex;
+    }
+    .main_nav_item{
+      margin-right: 0px;
+    }
+    .main_nav.active{
+      display: block;
+      position: absolute;
+      width: 110vw;
+      height: 100vh;
+      left: -20px;
+      background-color: #222222;
+      top:3.5rem;
+      padding-left: 2rem;
+      box-sizing: border-box;
+      transform: translateX(0vw);
     }
   }
