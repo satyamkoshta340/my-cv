@@ -47,7 +47,7 @@ function Resume() {
             <div className='detail-item'>
               <span className='detail-item-year'>2022</span>
               <span className='detail-item-caption'>Swarajya Magazine</span>
-              <h4>Pyhton Developer Intern</h4>
+              <h4>Python Developer Intern</h4>
               <p>Worked on email template generation service using
                 python, html, css, postgresql database also implemented the referral application with email integration for the newsletter which enhance the buisness demand by 7%.</p>
             </div>

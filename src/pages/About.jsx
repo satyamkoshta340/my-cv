@@ -46,7 +46,7 @@ function About() {
               {/* <span className='about_title'>Web Designer</span> */}
               <WordAnimation />
               <h1>Satyam Koshta</h1>
-              <p>A software engineer from India. Always curious to learn new things and work in the collavoration of team, and have a precise skill of leading team to give a productive output.</p>
+              <p>A software engineer from India. Always curious to learn new things and work in the collaboration of team, and have a precise skill of leading team to give a productive output.</p>
               <div className='row button-row'>
                 <a href={satyamKoshtaResume} download="SatyamKoshtaCV"><button className='button-main'>Download CV</button></a>
                 <a href='mailto:satyamkoshta340@gmail.com'><button>Contact</button></a>
