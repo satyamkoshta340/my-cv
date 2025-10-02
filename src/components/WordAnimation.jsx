@@ -1,50 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { animate, splitText, stagger } from 'animejs';
 
 const WordAnimation = () => {
-  const [word, setWord] = useState("");
-  const [isWriting, setIsWriting] = useState(true);
+  const [currentIdx, setCurrentIdx] = useState(0);
   const words = ["Web Designer", "Software Engineer", "Quick Learner"];
-  let i = 0;
-  const [ targetWord, setTargetWord] = useState(words[i]);
+  const wordRef = useRef();
 
   useEffect(() => {
-    let animationTimeout;
+    const { chars } = splitText('#temp', {
+      chars: { wrap: 'clip' },
+    });
 
-    const writeWord = () => {
-      const currentWordLength = word.length;
-
-      if (isWriting) {
-        if (currentWordLength < targetWord.length) {
-          setWord(targetWord.substring(0, currentWordLength + 1));
-          animationTimeout = setTimeout(writeWord, 100); // Adjust the delay between letters
-        } else {
-          setIsWriting(false);
-          animationTimeout = setTimeout(writeWord, 1000); // Adjust the delay before erasing
-        }
-      } else {
-        if (currentWordLength > 0) {
-          setWord(word.substring(0, currentWordLength - 1));
-          animationTimeout = setTimeout(writeWord, 100); // Adjust the delay between erasing letters
-        } else {
-          i += 1;
-          i %= words.length;
-          setTargetWord(words[i]);
-          setIsWriting(true);
-          animationTimeout = setTimeout(writeWord, 1000); // Adjust the delay before writing again
-        }
-      }
-    };
-
-    animationTimeout = setTimeout(writeWord, 300); // Adjust the delay before starting animation
-
-    return () => {
-      clearTimeout(animationTimeout);
-    };
-  }, [word, isWriting]);
+    animate(chars, {
+      y: [
+        { to: ['100%', '0%'] },
+        { to: '-100%', delay: 750, ease: 'in(3)' }
+      ],
+      duration: 750,
+      ease: 'out(3)',
+      delay: stagger(50),
+      // loop: false,
+      onComplete: () => {
+        setTimeout(() => {
+          setCurrentIdx((prev) => (prev + 1) % words.length);
+        }, 750);
+      } 
+    });
+  }, [currentIdx]);
 
   return (
-    <div className="animation-container">
-      <span className="word">{word}</span>
+    <div>
+      <span ref={wordRef} id="temp">{words[currentIdx]}</span>
     </div>
   );
 };

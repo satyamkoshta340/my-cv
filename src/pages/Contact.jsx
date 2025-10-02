@@ -48,7 +48,15 @@ function Contact() {
             <div className='heading-box'>
               <h2 className='underline-heading'>How Can I Help You?</h2>
             </div>
-            <form>
+            <form onSubmit={e => {
+              e.preventDefault();
+              const name = e.target[0].value;
+              const email = e.target[1].value;
+              const subject = e.target[2].value;
+              const message = e.target[3].value;
+              const mailto = `mailto:satyamkoshta340@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`)}`;
+              window.location.href = mailto;
+            }}>
               <div className='row contact-mail-box'>
                 <div className='col input-container'>
                   <input type='text' placeholder='Full Name' required/>
