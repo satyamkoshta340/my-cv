@@ -33,7 +33,8 @@
     border-left: 2px solid #333;
     min-height: 1rem;
 }
-.detail-item{
+
+.detail-item {
     border-left: 2px solid #333;
     border-bottom: 2px solid #333;
     margin-left: 1rem;
@@ -41,17 +42,30 @@
     position: relative;
     padding-top: 3rem;
     padding-bottom: 1rem;
-    p{
-        margin-top: 5px;
-        font-size: 14px;
-    }
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .detail-item-last{
     border-bottom: none;
 }
-.detail-item-year{
+
+
+
+
+.detail-item-header {
+    position: relative;
+    min-height: 28px;
+    margin-bottom: 0.5rem;
+    display: flex;
+}
+.detail-item-header-block {
     position: absolute;
-    left: -20px;
+    width: max-content;
+    left: -45px;
+}
+
+.detail-item-year {
     border: 2.5px solid $primary;
     border-radius: 50px;
     padding-left: 10px;
@@ -59,16 +73,30 @@
     font-size: 12px;
     padding-top: 1px;
     padding-bottom: 3px;
-    top: 10px;
     background-color: $dark-background;
+    vertical-align: middle;
+    display: inline-block;
+    z-index: 1;
 }
-.detail-item-caption{
-    position: absolute;
-    top: 10px;
-    font-size: 12px;
-    color: $gray;
-    padding-left: 16px;
-    padding-top: 5px;
+
+
+
+
+.detail-item-caption {
+    font-size: 13px;
+    color: $primary;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding-left: 0;
+    padding-top: 1px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 10px;
+    text-shadow: 0 1px 6px rgba($primary, 0.18), 0 0px 1px #fff;
+    background: linear-gradient(90deg, $primary 60%, $secondary 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .certificate-container{
