@@ -61,6 +61,29 @@
     }
 }
 
+.char-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% 1rem;
+}
+
+.face {
+  position: absolute;
+  left: 0;
+}
+
+.face-bottom {
+  top: 100%;
+  transform-origin: 50% 0%;
+  transform: rotateX(90deg);
+}
+
+.face-top {
+  bottom: 100%;
+  transform-origin: 50% 100%;
+  transform: rotateX(-90deg);
+}
+
 @media screen and (max-width: 776px) {
     .contact-container{
         flex-direction: column;

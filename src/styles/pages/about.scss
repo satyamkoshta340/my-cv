@@ -92,20 +92,30 @@
   }
 }
 
+
 .skil-row {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   color: #444;
-  gap: 5rem;
+  gap: 4rem;
   flex-wrap: wrap;
   margin-left: 3rem;
   margin-bottom: 3rem;
 }
 
 .skill-icon {
-  transition: color 0.4s;
+  color: #007ced;
+  filter: drop-shadow(0 2px 8px rgba(0,124,237,0.18));
+  border-radius: 12px;
+  padding: 0.2em;
+  background: none;
+  transition: color 0.3s, transform 0.3s, filter 0.3s;
+  will-change: transform, color;
 }
 .skill-icon:hover {
   color: #fff;
+  background: linear-gradient(120deg, #00c6fb 0%, #007ced 100%);
+  transform: scale(1.18) rotate(-8deg);
+  filter: drop-shadow(0 6px 18px rgba(0,124,237,0.28));
 }
 
 .ff-item-container {
@@ -116,29 +126,39 @@
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }
+
 .ff-item {
   width: 23%;
   height: 12rem;
-  background-color: #333;
-  border: 2px solid #444;
-  border-radius: 10px;
-  box-shadow: none;
+  background: linear-gradient(135deg, #222 60%, #007ced 100%);
+  border: 2.5px solid #007ced;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(0,124,237,0.18);
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  perspective: 800px;
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.4s, border-color 0.3s;
+  will-change: transform, box-shadow, border-color;
 
   span {
     font-size: 4rem;
     line-height: 1;
+    text-shadow: 0 2px 12px #007ced99, 0 0px 2px #fff;
+    transition: text-shadow 0.3s;
   }
 }
 
 .ff-item:hover {
-  transform: translateY(-10px);
+  transform: scale(1.08) rotateY(12deg);
+  box-shadow: 0 16px 48px 0 rgba(0,124,237,0.32);
+  border-color: #00c6fb;
+}
+.ff-item:hover span {
+  text-shadow: 0 4px 24px #00c6fbcc, 0 0px 4px #fff;
 }
 
 @media screen and (max-width: 776px) {
