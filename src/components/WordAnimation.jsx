@@ -1,36 +1,37 @@
-import React, { useState, useEffect, useRef } from "react";
-import { animate, splitText, stagger } from 'animejs';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const WORDS = [
+  'Full-Stack Engineer',
+  'React Specialist',
+  'Cloud & DevOps',
+  'System Designer',
+];
 
 const WordAnimation = () => {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const words = ["Web Designer", "Software Engineer", "Quick Learner"];
-  const wordRef = useRef();
+  const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const { chars } = splitText('#temp', {
-      chars: { wrap: 'clip' },
-    });
-
-    animate(chars, {
-      y: [
-        { to: ['100%', '0%'] },
-        { to: '-100%', delay: 750, ease: 'in(3)' }
-      ],
-      duration: 750,
-      ease: 'out(3)',
-      delay: stagger(50),
-      // loop: false,
-      onComplete: () => {
-        setTimeout(() => {
-          setCurrentIdx((prev) => (prev + 1) % words.length);
-        }, 750);
-      } 
-    });
-  }, [currentIdx]);
+    const id = setInterval(() => {
+      setIdx((prev) => (prev + 1) % WORDS.length);
+    }, 2600);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div>
-      <span ref={wordRef} id="temp">{words[currentIdx]}</span>
+    <div className="word-rotator" aria-live="polite">
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={WORDS[idx]}
+          className="word-rotator-item"
+          initial={{ y: '110%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          exit={{ y: '-110%', opacity: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {WORDS[idx]}
+        </motion.span>
+      </AnimatePresence>
     </div>
   );
 };

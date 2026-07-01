@@ -1,219 +1,281 @@
-.main_photo_container {
-  margin-top: 5rem;
+// ── Hero ──────────────────────────────────────────
+.hero {
+  margin-top: 3.5rem;
   margin-bottom: 4rem;
+  gap: 4rem;
+  flex-wrap: wrap;
 }
 
-.container {
-  position: relative;
-  width: 19rem;
-  height: 19rem;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  margin-right: 4rem;
-  border-radius: 1000px;
-  border: 18px solid #444;
-  background-color: #444;
-  box-shadow: 0 0 25px 0 rgba(0,0,0,.8);
+.hero-copy {
+  flex: 1 1 420px;
+  max-width: 560px;
 }
-
-.background {
-  width: 105%;
-  height: 105%;
-  // background-image: url("./../../../src/assets/satyam.jpeg");
-  background-size: contain;
-  background-position: center;
-  position: absolute;
-  left: -5px;
-  top: -3px;
-  background-repeat: no-repeat;
+.hero-hi {
+  display: inline-block;
+  font-size: 0.95rem;
+  color: $text-muted;
+  margin-bottom: 0.6rem;
 }
-
-.about_info {
-  max-width: 40%;
-  p {
-    color: $primary-font;
-    font-size: 14px;
-  }
-  .about_title {
-    font-size: 16px;
-    color: #aaa;
-    font-weight: 300;
-    margin-bottom: 10px;
-  }
+.hero-name {
+  font-size: 3.4rem;
+  line-height: 1.05;
+  margin-bottom: 0.4rem;
+  background: $grad-text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.heading-box {
-  margin-bottom: 2rem;
+.hero-summary {
+  color: $text-muted;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-top: 1.1rem;
+  max-width: 34rem;
 }
 
 .button-row {
-  gap: 2rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-top: 1.8rem;
 
   button {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 0.8rem 1.8rem;
     border-radius: 40px;
-    border: 2px solid #aaa;
-  }
-  button:hover {
-    background-color: #aaa;
-    color: #444;
-    border-color: #aaa;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
   .button-main {
-    border-color: $primary;
+    color: #fff;
+    border: none;
+    background: $grad-primary;
+    box-shadow: 0 10px 30px -10px rgba(77, 159, 255, 0.7);
   }
   .button-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px -10px rgba(168, 85, 247, 0.75);
+  }
+  .button-ghost {
+    color: $text;
+    background: transparent;
+    border: 1.5px solid $glass-border-2;
+  }
+  .button-ghost:hover {
+    transform: translateY(-3px);
     border-color: $primary;
-    background-color: $primary;
-    color: white;
+    background: rgba(77, 159, 255, 0.08);
   }
 }
 
-.wid-blocks {
-  flex-wrap: wrap;
-}
-
-.wid-block {
-  width: 50%;
-  max-width: 50%;
-  margin-bottom: 1rem;
-}
-
-.wid-block-detail {
-  margin-left: 1.2rem;
-  box-sizing: border-box;
-
-  p {
-    margin-top: 0.4rem;
-    font-size: 0.9em;
-    padding-right: 1rem;
+.hero-socials {
+  gap: 1rem;
+  margin-top: 1.6rem;
+  font-size: 1.4rem;
+  a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: $text-muted;
+    @include glass;
+    transition: all 0.25s ease;
+  }
+  a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    border-color: $primary;
+    box-shadow: 0 8px 22px -8px rgba(77, 159, 255, 0.7);
   }
 }
 
-
-.skil-row {
-  font-size: 2.7rem;
-  color: #444;
-  gap: 4rem;
-  flex-wrap: wrap;
-  margin-left: 3rem;
-  margin-bottom: 3rem;
+.hero-photo {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.hero-photo-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #4d9fff, #a855f7, #22d3ee, #4d9fff);
+  filter: blur(2px);
+  opacity: 0.85;
+}
+.hero-photo-img {
+  position: relative;
+  width: 18.4rem;
+  height: 18.4rem;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center top;
+  border: 6px solid $bg;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4), 0 20px 50px -20px rgba(0, 0, 0, 0.8);
 }
 
-.skill-icon {
-  color: #007ced;
-  filter: drop-shadow(0 2px 8px rgba(0,124,237,0.18));
-  border-radius: 12px;
-  padding: 0.2em;
+// ── Stats ─────────────────────────────────────────
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+  margin-bottom: 5rem;
+}
+.stat-card {
+  @include glass;
+  border-radius: $radius-sm;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(77, 159, 255, 0.4);
+}
+.stat-value {
+  font-family: $font-display;
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1;
+  background: $grad-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.stat-suffix {
+  -webkit-text-fill-color: initial;
   background: none;
-  transition: color 0.3s, transform 0.3s, filter 0.3s;
-  will-change: transform, color;
 }
-.skill-icon:hover {
-  color: #fff;
-  background: linear-gradient(120deg, #00c6fb 0%, #007ced 100%);
-  transform: scale(1.18) rotate(-8deg);
-  filter: drop-shadow(0 6px 18px rgba(0,124,237,0.28));
+.stat-label {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: $text-muted;
+  letter-spacing: 0.02em;
 }
 
-.ff-item-container {
-  justify-content: space-between;
+// ── What I Do ─────────────────────────────────────
+.wid-container {
+  margin-bottom: 5rem;
 }
-.ff-icon {
-  color: $primary;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.wid-blocks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
 }
-
-.ff-item {
-  width: 23%;
-  height: 12rem;
-  background: linear-gradient(135deg, #222 60%, #007ced 100%);
-  border: 2.5px solid #007ced;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px 0 rgba(0,124,237,0.18);
-  overflow: hidden;
-  box-sizing: border-box;
+.wid-block {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  perspective: 800px;
-  transition: transform 0.4s cubic-bezier(.4,0,.2,1), box-shadow 0.4s, border-color 0.3s;
-  will-change: transform, box-shadow, border-color;
-
-  span {
-    font-size: 4rem;
-    line-height: 1;
-    text-shadow: 0 2px 12px #007ced99, 0 0px 2px #fff;
-    transition: text-shadow 0.3s;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  border-radius: $radius;
+  @include glass;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.wid-block:hover {
+  border-color: rgba(77, 159, 255, 0.4);
+  box-shadow: 0 18px 40px -22px rgba(77, 159, 255, 0.5);
+}
+.wid-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(77, 159, 255, 0.25), rgba(168, 85, 247, 0.25));
+  border: 1px solid $glass-border-2;
+}
+.wid-block-detail {
+  h3 {
+    font-size: 1.1rem;
+    color: $text;
+  }
+  p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: $text-muted;
   }
 }
 
-.ff-item:hover {
-  transform: scale(1.08) rotateY(12deg);
-  box-shadow: 0 16px 48px 0 rgba(0,124,237,0.32);
-  border-color: #00c6fb;
+// ── Skills grid ───────────────────────────────────
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.9rem;
 }
-.ff-item:hover span {
-  text-shadow: 0 4px 24px #00c6fbcc, 0 0px 4px #fff;
+.skill-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 0.5rem;
+  border-radius: $radius-sm;
+  @include glass;
+  cursor: default;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  span {
+    font-size: 0.78rem;
+    color: $text-muted;
+  }
+}
+.skill-chip:hover {
+  border-color: rgba(77, 159, 255, 0.5);
+  background: rgba(77, 159, 255, 0.08);
+  span {
+    color: $text;
+  }
+}
+.skill-icon {
+  font-size: 2rem;
+  color: $primary-soft;
+  transition: color 0.3s ease;
+}
+.skill-chip:hover .skill-icon {
+  color: #fff;
+}
+
+@media screen and (max-width: 900px) {
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skill-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media screen and (max-width: 776px) {
-  .main_photo_container {
-    flex-direction: column;
-    margin-top: 2rem;
+  .hero {
+    flex-direction: column-reverse;
+    margin-top: 1.5rem;
+    gap: 2.5rem;
+    text-align: center;
   }
-
-  .container {
-    width: 14rem;
-    height: 14rem;
-    margin-right: 0rem;
+  .hero-name {
+    font-size: 2.5rem;
   }
-  .about_info {
-    max-width: 85%;
-    word-break: keep-all;
-    h1{
-        text-align: center;
-        font-size: 35px;
-    }
-  }
-  .ff-item-container{
+  .hero-copy {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
   }
-
-  .ff-item{
+  .button-row,
+  .hero-socials {
+    justify-content: center;
+  }
+  .hero-photo {
     width: 15rem;
+    height: 15rem;
   }
-
-  .button-row{
-    gap: 1rem;
-    button{
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+  .hero-photo-img {
+    width: 13.6rem;
+    height: 13.6rem;
   }
-
-  .wid-block {
-    width: 100%;
-    max-width: 100%;
-    align-self: center;
+  .wid-blocks {
+    grid-template-columns: 1fr;
   }
-  .wid-block-detail{
-    p {
-        padding-right: 0rem;
-        word-break: keep-all;
-    }
-  }
-  .skil-row {
-    flex-wrap: wrap;
-    margin-bottom: 3rem;
-    margin-left: 0rem;
-    justify-content: center;
+  .skill-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

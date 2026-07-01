@@ -1,40 +1,27 @@
-.animation-container {
-    position: relative;
-    min-height: 1rem;
-    margin-bottom: 10px;
-  }
-  
-  .word {
-    display: inline-block;
-    font-size: 16px;
-    color: #aaa;
-    font-weight: 300;
-    border-right: 1px solid #aaa;
-    animation: blinkCursor 1s infinite;
-    box-sizing: border-box;
-  }
-  
-  
-  @keyframes blinkCursor {
-    0% {
-        border-color: #aaa;
-    }
-    50% {
-      border-color: #aaaaaa00;
-    }
-    100% {
-        border-color: #aaa;
-    }
-  }
-  
+.word-rotator {
+  position: relative;
+  height: 2.4rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.word-rotator-item {
+  display: inline-block;
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: $grad-primary;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.01em;
+}
 
 @media screen and (max-width: 776px) {
-  .animation-container{
-    margin-top: 1rem;
-    display: flex;
+  .word-rotator {
     justify-content: center;
-    align-items: center;
-    min-height: 2rem;
-    
+  }
+  .word-rotator-item {
+    font-size: 1.25rem;
   }
 }

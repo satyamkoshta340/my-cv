@@ -1,174 +1,196 @@
-import React from 'react';
-import { TbBrandCpp } from "react-icons/tb";
+/* eslint-disable react/prop-types */
+import { motion } from 'framer-motion';
 import SkillBlock from '../components/SkillBlock';
-import { RiFileExcel2Line } from "react-icons/ri";
-import { MdOutlineDeveloperMode } from "react-icons/md";
-import { FaPython } from "react-icons/fa";
+import { fadeUp, scaleIn, stagger, viewportOnce } from '../components/motion';
+import { FiBriefcase, FiBookOpen } from 'react-icons/fi';
+import { HiOutlineSparkles } from 'react-icons/hi2';
+
+const EXPERIENCE = [
+  {
+    year: 'Sep 2023 – Present',
+    org: 'TCS — Delhi',
+    role: 'System Engineer',
+    points: [
+      'Architected and deployed a custom OpenID Connect provider with full OAuth 2.0 authorization-server support, enabling enterprise SSO for 600K+ users at 98.9% authentication uptime.',
+      'Led end-to-end cloud migration from Heroku to AWS (ECS, CloudFormation, CloudWatch) with a high-availability, auto-scaling architecture; GitHub Actions CI/CD cut deployment time by 60% (20 → 8 min).',
+      'Built and optimized enterprise-grade healthcare microservices with Node.js, React.js, Python, Redis, PostgreSQL and AWS, improving response times by 25%.',
+      'Engineered a DynamoDB-backed reprocessing pipeline with a 3-attempt retry mechanism and automated incident escalation, reducing registration backlog by 89%.',
+      'Established a test-engineering culture with comprehensive Jest unit/integration suites, reaching 85%+ coverage on authentication flows and core APIs.',
+    ],
+  },
+  {
+    year: 'Oct 2022 – Dec 2022',
+    org: 'Swarajya — Remote',
+    role: 'Full Stack Intern',
+    points: [
+      'Developed dynamic, reusable, responsive email templates (HTML/CSS) with cross-client compatibility.',
+      'Built a referral system with automated email integration, increasing newsletter subscriptions by 21%.',
+      'Created a Handlebars.js email-generation system integrated with backend newsletter services for automated, personalized daily communications.',
+    ],
+  },
+  {
+    year: 'Apr 2022 – Oct 2022',
+    org: 'Agriday — Remote',
+    role: 'Full Stack Intern',
+    points: [
+      'Built a React.js platform using React Router and Context API with RESTful backend integration.',
+      'Created scraping scripts that continuously collected data from online sources, enabling near real-time streaming at 90% availability.',
+      'Integrated real-time in-app messaging via Firebase Cloud Messaging for instant user notifications.',
+    ],
+  },
+];
+
+const EDUCATION = [
+  {
+    year: 'Jul 2019 – Jul 2023',
+    org: 'FET GKV Haridwar',
+    role: 'B.Tech, Computer Science',
+    text: 'Bachelor of Technology in Computer Science & Engineering. CGPA: 8.8 / 10.0.',
+  },
+];
+
+const PROJECTS = [
+  {
+    title: 'Real-Time Multiplayer Collaboration Platform',
+    stack: 'React · Node · Socket.io · Canvas',
+    points: [
+      'Event-driven multiplayer platform on Socket.io and Node.js supporting concurrent users with low latency.',
+      'Scalable frontend state synchronization with interactive Canvas-based rendering for collaborative sessions.',
+      'Improved UI maintainability and responsiveness with a modular SASS architecture and reusable components.',
+    ],
+  },
+];
+
+const SKILLS = [
+  ['Python', 95], ['C++', 88], ['JavaScript', 92], ['TypeScript', 85],
+  ['React.js', 93], ['Next.js', 82], ['Node.js', 92], ['Express', 90],
+  ['FastAPI', 85], ['PostgreSQL', 88], ['MongoDB', 86], ['Redis', 82],
+  ['AWS', 88], ['Docker', 84], ['Git & CI/CD', 90],
+];
+
+function TimelineItem({ item, isLast }) {
+  return (
+    <motion.div className={`tl-item ${isLast ? 'tl-item-last' : ''}`} variants={fadeUp}>
+      <div className="tl-marker" />
+      <div className="tl-header">
+        <span className="tl-year">{item.year}</span>
+        <span className="tl-org">{item.org}</span>
+      </div>
+      <h4 className="tl-role">{item.role}</h4>
+      {item.points ? (
+        <ul className="tl-points">
+          {item.points.map((p, i) => (
+            <li key={i}>{p}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="tl-text">{item.text}</p>
+      )}
+    </motion.div>
+  );
+}
 
 function Resume() {
   return (
-    <div className='resume'>
-      <div className='main-headline'>
+    <div className="resume">
+      <motion.div
+        className="main-headline"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         Resume
+      </motion.div>
+
+      <div className="details">
+        <div className="detail-items">
+          {/* Experience */}
+          <div className="detail-block">
+            <div className="heading-box">
+              <h2 className="underline-heading">
+                <FiBriefcase className="head-ic" /> Experience
+              </h2>
+            </div>
+            <motion.div
+              className="timeline"
+              variants={stagger(0.12)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+            >
+              {EXPERIENCE.map((item, i) => (
+                <TimelineItem key={item.org} item={item} isLast={i === EXPERIENCE.length - 1} />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Education + Projects */}
+          <div className="detail-block">
+            <div className="heading-box">
+              <h2 className="underline-heading">
+                <FiBookOpen className="head-ic" /> Education
+              </h2>
+            </div>
+            <motion.div
+              className="timeline"
+              variants={stagger(0.12)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+            >
+              {EDUCATION.map((item, i) => (
+                <TimelineItem key={item.org} item={item} isLast={i === EDUCATION.length - 1} />
+              ))}
+            </motion.div>
+
+            <div className="heading-box" style={{ marginTop: '2.5rem' }}>
+              <h2 className="underline-heading">
+                <HiOutlineSparkles className="head-ic" /> Projects
+              </h2>
+            </div>
+            <motion.div
+              variants={stagger(0.12)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+            >
+              {PROJECTS.map((p) => (
+                <motion.div className="project-card" variants={fadeUp} whileHover={{ y: -5 }} key={p.title}>
+                  <h4>{p.title}</h4>
+                  <span className="project-stack">{p.stack}</span>
+                  <ul className="tl-points">
+                    {p.points.map((pt, i) => (
+                      <li key={i}>{pt}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Skills */}
+        <div className="skills-block">
+          <div className="heading-box">
+            <h2 className="underline-heading">Skills</h2>
+          </div>
+          <motion.div
+            className="skills-container"
+            variants={stagger(0.05)}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            {SKILLS.map(([name, power]) => (
+              <motion.div variants={scaleIn} key={name} style={{ width: '100%' }}>
+                <SkillBlock skillName={name} skillPower={power} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
-      <div className='details'>
-        <div className=' row detail-items'>
-          <div className='detail-block'>
-            <div className='heading-box'>
-              <h2 className='underline-heading'>Experience</h2>
-            </div>
-            <div className='detail-item'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2023 – Current</span>
-                  <span className='detail-item-caption'>TCS – India</span>
-                </div>
-              </div>
-              <h4>System Engineer</h4>
-              <ul style={{marginLeft: '1.2em'}}>
-                <li>Developed and deployed scalable full-stack features for a healthcare web application using React, Node.js, and Express, improving system performance and user experience.</li>
-                <li>Migrated infrastructure from Heroku to AWS (EC2, S3, RDS), improving scalability, reliability, and deployment efficiency by over 40%.</li>
-                <li>Designed and maintained automated background jobs using AWS services (e.g., Lambda, SQS, CloudWatch) to ingest and process multiple third-party resource datasets, enhancing backend efficiency.</li>
-                <li>Designed and implemented critical data integration and synchronization features for smooth interoperability with third-party systems.</li>
-                <li>Implemented CI/CD pipelines using GitHub Actions, automating testing, build, and deployment processes to reduce delivery cycle time by 30%.</li>
-                <li>Collaborated closely with cross-functional teams in an Agile environment, participating in sprint planning, reviews, and code reviews.</li>
-                <li>Developed a scalable gRPC-enabled service layer for LLM integration, utilizing LangChain to orchestrate agentic workflows and enabling modular, distributed AI-driven applications.</li>
-              </ul>
-            </div>
-            <div className='detail-item'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2022</span>
-                  <span className='detail-item-caption'>Swarajya Magazine</span>
-                </div>
-              </div>
-              <h4>Python Developer Intern</h4>
-              <p>Worked on email template generation service using
-                python, html, css, postgresql database also implemented the referral application with email integration for the newsletter which enhance the buisness demand by 7%.</p>
-            </div>
-            <div className='detail-item'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2022</span>
-                  <span className='detail-item-caption'>Agriday</span>
-                </div>
-              </div>
-              <h4>Full Stack Developer Intern</h4>
-              <p>Developed frontend website of the company, using ReactJs,
-                Developed backend services, APIs used for website and mobile app.
-                Designed Admin portal to directly communicate to the server.
-                Also wrote scripts for scraping the high level data from the online resources for the
-                live data points service.</p>
-            </div>
-          </div>
-
-          <div className='detail-block'>
-            <div className='heading-box'>
-              <h2 className='underline-heading'>Education</h2>
-            </div>
-            <div className='detail-item'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2023</span>
-                  <span className='detail-item-caption'>FET GKDU Haridwar</span>
-                </div>
-              </div>
-              <h4>Computer Science & Engineering</h4>
-              <p>BTech in Computer Science successfully completed, equipped with in-depth knowledge and practical skills to thrive in the dynamic field of technology.</p>
-            </div>
-            <div className='detail-space'></div>
-            <div className='detail-item'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2018</span>
-                  <span className='detail-item-caption'>SRK I C Katra</span>
-                </div>
-              </div>
-              <h4>Intermediate</h4>
-              <p>Intermediate studies completed, demonstrating strong academic foundation and readiness for further educational pursuits or professional endeavors.</p>
-            </div>
-            <div className='detail-space'></div>
-            <div className='detail-item detail-item-last'>
-              <div className='detail-item-header'>
-                <div className='detail-item-header-block'>
-                  <span className='detail-item-year'>2016</span>
-                  <span className='detail-item-caption'>SRK I C Katra</span>
-                </div>
-              </div>
-              <h4>Highschool</h4>
-              <p>High school education successfully completed, showcasing a solid academic background.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <div className='certificates'>
-          <div className='heading-box'>
-            <h2 className='underline-heading'>Certificates</h2>
-          </div>
-          <div className='row certificate-container'>
-            <div className='row cert-block'>
-              <div className='tech-icon'>
-                <FaPython/>
-              </div>
-              <div className='cert-detail'>
-                <h4>PYTHON DATA STRUCTURES</h4>
-                <span>UNIVERSITY OF MICHIGAN </span>
-                <span>Sept 2021</span>
-              </div>
-            </div>
-
-            <div className='row cert-block'>
-              <div className='tech-icon'>
-                <MdOutlineDeveloperMode/>
-              </div>
-              <div className='cert-detail'>
-                <h4>HTML, CSS, AND JAVASCRIPTS</h4>
-                <span>JOHNS HOPKINS UNIVERSITY</span>
-                <span>Sept 2021</span>
-              </div>
-            </div>
-
-            <div className='row cert-block'>
-              <div className='tech-icon'>
-                <RiFileExcel2Line/>
-              </div>
-              <div className='cert-detail'>
-                <h4>EXCEL SKILLS FOR BUSINESS</h4>
-                <span>MACQUARIE UNIVERSITY </span>
-                <span>Sept 2021</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div className='skills-block'>
-          <div className='heading-box'>
-            <h2 className='underline-heading'>Skills</h2>
-          </div>
-          <div className='row skills-container'>
-            <SkillBlock skillName={"C++"} skillPower={95}/>
-            <SkillBlock skillName={"Python"} skillPower={95}/>
-            <SkillBlock skillName={"HTML"} skillPower={92}/>
-            <SkillBlock skillName={"CSS"} skillPower={90}/>
-            <SkillBlock skillName={"Javascript"} skillPower={90}/>
-            <SkillBlock skillName={"Typescript"} skillPower={80}/>
-            <SkillBlock skillName={"React"} skillPower={90}/>
-            <SkillBlock skillName={"Node"} skillPower={92}/>
-            <SkillBlock skillName={"Express"} skillPower={93}/>
-            <SkillBlock skillName={"MongoDB"} skillPower={92}/>
-            <SkillBlock skillName={"MySQL"} skillPower={90}/>
-            <SkillBlock skillName={"Java"} skillPower={80}/>
-            <SkillBlock skillName={"Git"} skillPower={85}/>
-            <SkillBlock skillName={"Excel"} skillPower={70}/>
-          </div>
-        </div>
-
-      </div>
-
     </div>
-  )
+  );
 }
 
-export default Resume
+export default Resume;

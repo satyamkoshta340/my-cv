@@ -1,154 +1,213 @@
-import React, {useRef, useEffect} from 'react';
+/* eslint-disable react/prop-types */
+import { motion } from 'framer-motion';
 import ApiIcon from '@mui/icons-material/Api';
-import CodeIcon from '@mui/icons-material/Code';
-import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import HubIcon from '@mui/icons-material/Hub';
+import CloudSyncIcon from '@mui/icons-material/CloudSync';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import WordAnimation from '../components/WordAnimation';
-import { TbBrandCpp, TbBrandJavascript } from "react-icons/tb";
-import { FaPython, FaHtml5, FaCss3, FaSass, FaNode, FaReact, FaGit, FaAward, FaLinkedin } from "react-icons/fa";
-import { SiMongodb, SiMysql, SiPostgresql, SiPostman, SiRedux, SiLeetcode, SiHackerrank} from "react-icons/si";
+import Counter from '../components/Counter';
+import { fadeUp, scaleIn, stagger, viewportOnce } from '../components/motion';
+import { TbBrandCpp, TbBrandTypescript } from 'react-icons/tb';
+import { FaPython, FaNode, FaReact, FaGit, FaAws, FaDocker, FaGithub, FaLinkedin } from 'react-icons/fa';
+import {
+  SiJavascript, SiMongodb, SiMysql, SiPostgresql, SiRedis,
+  SiRedux, SiExpress, SiNextdotjs, SiFastapi, SiJest,
+} from 'react-icons/si';
 import satyamBackground from '../assets/satyam.jpeg';
 import satyamKoshtaResume from '../assets/SatyamKoshtaResume.pdf';
 
-function About() {
-  const containerRef = useRef(null);
-  const backgroundRef = useRef(null);
-  useEffect(() => {
-    const container = containerRef.current;
-    const background = backgroundRef.current;
+const WHAT_I_DO = [
+  {
+    Icon: VerifiedUserIcon,
+    title: 'Auth & Identity',
+    text: 'Architected an enterprise OIDC/SSO provider with full OAuth 2.0 authorization-server support, serving 600K+ users at 98.9% uptime.',
+  },
+  {
+    Icon: CloudSyncIcon,
+    title: 'Cloud & DevOps',
+    text: 'Led cloud migration to AWS (ECS, CloudFormation, CloudWatch) and built GitHub Actions CI/CD pipelines that cut deployment time by 60%.',
+  },
+  {
+    Icon: HubIcon,
+    title: 'Distributed Systems',
+    text: 'Design resilient microservices and retry pipelines with Node.js, Python, Redis, PostgreSQL and DynamoDB — cutting registration backlog by 89%.',
+  },
+  {
+    Icon: ApiIcon,
+    title: 'Frontend Craft',
+    text: 'Deliver polished, accessible React.js interfaces with clean state management and modular SASS architecture for maintainable UIs.',
+  },
+];
 
-    const handleMouseMove = (event) => {
-      const { clientX, clientY } = event;
-      const containerRect = container.getBoundingClientRect();
-      const mouseX = clientX - containerRect.left;
-      const mouseY = clientY - containerRect.top;
+const SKILLS = [
+  { Icon: FaPython, name: 'Python' },
+  { Icon: TbBrandCpp, name: 'C++' },
+  { Icon: SiJavascript, name: 'JavaScript' },
+  { Icon: TbBrandTypescript, name: 'TypeScript' },
+  { Icon: FaReact, name: 'React' },
+  { Icon: SiNextdotjs, name: 'Next.js' },
+  { Icon: SiRedux, name: 'Redux' },
+  { Icon: FaNode, name: 'Node.js' },
+  { Icon: SiExpress, name: 'Express' },
+  { Icon: SiFastapi, name: 'FastAPI' },
+  { Icon: SiJest, name: 'Jest' },
+  { Icon: SiPostgresql, name: 'PostgreSQL' },
+  { Icon: SiMysql, name: 'MySQL' },
+  { Icon: SiMongodb, name: 'MongoDB' },
+  { Icon: SiRedis, name: 'Redis' },
+  { Icon: FaAws, name: 'AWS' },
+  { Icon: FaDocker, name: 'Docker' },
+  { Icon: FaGit, name: 'Git' },
+];
 
-      const offsetX = containerRect.width / 2 - mouseX;
-      const offsetY = containerRect.height / 2 - mouseY;
+const STATS = [
+  { value: 3, suffix: '+', label: 'Years Experience' },
+  { value: 600, suffix: 'K+', label: 'Users Served' },
+  { value: 98.9, suffix: '%', label: 'Auth Uptime', decimals: 1 },
+  { value: 85, suffix: '%+', label: 'Test Coverage' },
+];
 
-      background.style.transform = `translate(${offsetX * 0.01}px, ${offsetY * 0.01}px)`;
-    };
-
-    document.body.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      document.body.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
+function About({ setState }) {
   return (
     <div>
-        <div className='row align_center justify_center main_photo_container'>
-          <div ref={containerRef} className="container">
-            <div ref={backgroundRef} className="background" style={{ backgroundImage: `url(${satyamBackground})`}}></div>
-          </div>
-          <div className='about_info'>
-              {/* <span className='about_title'>Web Designer</span> */}
-              <WordAnimation />
-              <h1>Satyam Koshta</h1>
-              <p>A software engineer from India. Always curious to learn new things and work in the collaboration of team, and have a precise skill of leading team to give a productive output.</p>
-              <div className='row button-row'>
-                <a href={satyamKoshtaResume} download="SatyamKoshtaCV"><button className='button-main'>Download CV</button></a>
-                <a href='mailto:satyamkoshta340@gmail.com'><button>Contact</button></a>
-              </div>
-          </div>
+      {/* ── Hero ─────────────────────────────────────── */}
+      <section className="hero row align_center justify_center">
+        <motion.div
+          className="hero-copy"
+          variants={stagger(0.12)}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.span className="hero-hi" variants={fadeUp}>
+            👋 Hi, I&apos;m
+          </motion.span>
+          <motion.h1 className="hero-name" variants={fadeUp}>
+            Satyam Koshta
+          </motion.h1>
+          <motion.div variants={fadeUp}>
+            <WordAnimation />
+          </motion.div>
+          <motion.p className="hero-summary" variants={fadeUp}>
+            Full-Stack Engineer with 3+ years owning end-to-end product
+            development across distributed backend systems and high-performance
+            frontend interfaces — including a production OIDC/SSO provider
+            serving 600K+ users.
+          </motion.p>
+          <motion.div className="row button-row" variants={fadeUp}>
+            <a href={satyamKoshtaResume} download="SatyamKoshta_CV.pdf">
+              <button className="button-main">Download CV</button>
+            </a>
+            <button className="button-ghost" onClick={() => setState(2)}>
+              Get in touch
+            </button>
+          </motion.div>
+          <motion.div className="row hero-socials" variants={fadeUp}>
+            <a href="https://github.com/satyamkoshta340" target="_blank" rel="noreferrer" aria-label="GitHub">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/satyamkoshta340/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <FaLinkedin />
+            </a>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="hero-photo"
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        >
+          <motion.div
+            className="hero-photo-ring"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+          />
+          <div
+            className="hero-photo-img"
+            style={{ backgroundImage: `url(${satyamBackground})` }}
+          />
+        </motion.div>
+      </section>
+
+      {/* ── Stats ────────────────────────────────────── */}
+      <motion.div
+        className="stats-row"
+        variants={stagger(0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+      >
+        {STATS.map((s) => (
+          <motion.div className="stat-card" variants={scaleIn} key={s.label}>
+            <div className="stat-value">
+              <Counter value={s.value} decimals={s.decimals || 0} />
+              <span className="stat-suffix">{s.suffix}</span>
+            </div>
+            <div className="stat-label">{s.label}</div>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* ── What I Do ────────────────────────────────── */}
+      <section className="wid-container">
+        <div className="heading-box">
+          <span className="section-eyebrow">Capabilities</span>
+          <h2 className="underline-heading">What I Do</h2>
         </div>
-        <div className='wid-container'>
-          <div className='heading-box'>
-            <h2 className='underline-heading'>What I Do</h2>
-          </div>
-          <div className='row wid-blocks'>
-            <div className='row wid-block'>
-              <ApiIcon color='primary' sx ={{fontSize: 40}}/>
-              <div className='wid-block-detail'>
-                <h3>API</h3>
-                <p>
-                Passionate about building robust REST APIs, leveraging industry best practices and frameworks to deliver scalable and secure solutions for seamless client-server communication.
-                </p>
+        <motion.div
+          className="wid-blocks"
+          variants={stagger(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          {WHAT_I_DO.map(({ Icon, title, text }) => (
+            <motion.div
+              className="wid-block"
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              key={title}
+            >
+              <div className="wid-icon">
+                <Icon sx={{ fontSize: 30 }} />
               </div>
-            </div>
-            <div className='row wid-block'>
-              <CodeIcon color='primary' sx ={{fontSize: 40}}/>
-              <div className='wid-block-detail'>
-                <h3>Problem Solving</h3>
-                <p>
-                Dedicated developer adept at leveraging Data Structures and Algorithms (DSA) to tackle complex problems, providing efficient and optimized solutions.
-                </p>
+              <div className="wid-block-detail">
+                <h3>{title}</h3>
+                <p>{text}</p>
               </div>
-            </div>
-            <div className='row wid-block'>
-              <DeveloperModeIcon color='primary' sx ={{fontSize: 40}}/>
-              <div className='wid-block-detail'>
-                <h3>Development</h3>
-                <p>
-                Experienced in full-stack development using the MERN stack, employing modern tools and technologies to build responsive and feature-rich applications.
-                </p>
-              </div>
-            </div>
-            <div className='row wid-block'>
-              <GitHubIcon color='primary' sx ={{fontSize: 40}}/>
-              <div className='wid-block-detail'>
-                <h3>Open Source Dev</h3>
-                <p>
-                Enthusiastic developer with a strong affinity for open-source projects, actively contributing and collaborating using Git for version control and code management.
-                </p>
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* ── Skills ───────────────────────────────────── */}
+      <section className="wid-container">
+        <div className="heading-box">
+          <span className="section-eyebrow">Toolbox</span>
+          <h2 className="underline-heading">Key Skills</h2>
         </div>
-        <div className='wid-container'>
-          <div className='heading-box'>
-            <h2 className='underline-heading'>Key Skills</h2>
-          </div>
-          <div>
-            <div className='row skil-row'> 
-              <TbBrandCpp className='skill-icon'/>
-              <FaPython className='skill-icon'/>
-              <FaHtml5 className='skill-icon'/>
-              <FaCss3 className='skill-icon'/>
-              <TbBrandJavascript className='skill-icon'/>
-              <SiMongodb className='skill-icon'/>
-              <SiMysql className='skill-icon'/>
-              <SiPostgresql className='skill-icon'/>
-              <FaSass className='skill-icon'/>
-              <FaNode className='skill-icon'/>
-              <FaReact className='skill-icon'/>
-              <SiRedux className='skill-icon'/>
-              <SiPostman className='skill-icon'/>
-              <FaGit className='skill-icon'/>
-              
-            </div>
-          </div>
-        </div>
-        <div className='wid-container'>
-          <div className='heading-box'>
-            <h2 className='underline-heading'>Fun Facts</h2>
-          </div>
-          <div className='row ff-item-container'>
-            <div className='ff-item'>
-              <FaAward className='ff-icon'/>
-              <h4>Hacktober Fest</h4>
-              <span>3</span>
-            </div>
-            <div className='ff-item'>
-              <SiLeetcode className='ff-icon'/>
-              <h4>Solved Problems</h4>
-              <span>400<sup>+</sup></span>
-            </div>
-            <div className='ff-item'>
-              <SiHackerrank className='ff-icon'/>
-              <h4>Gold Badges</h4>
-              <span>4</span>
-            </div>
-            <div className='ff-item'>
-              <FaLinkedin className='ff-icon'/>
-              <h4>Connections</h4>
-              <span>500<sup>+</sup></span>
-            </div>
-          </div>
-        </div>
+        <motion.div
+          className="skill-grid"
+          variants={stagger(0.05)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          {SKILLS.map(({ Icon, name }) => (
+            <motion.div
+              className="skill-chip"
+              variants={scaleIn}
+              whileHover={{ y: -5, scale: 1.05 }}
+              key={name}
+            >
+              <Icon className="skill-icon" />
+              <span>{name}</span>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
     </div>
-  )
+  );
 }
 
-export default About
+export default About;

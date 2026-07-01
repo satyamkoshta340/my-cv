@@ -1,5 +1,5 @@
-
-import React, { useRef, useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useRef, useEffect, useState } from "react";
 
 function SkillBlock({ skillName, skillPower }) {
   const barRef = useRef(null);

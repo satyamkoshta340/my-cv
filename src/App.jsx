@@ -2,36 +2,44 @@ import './App.css';
 import './styles/main.scss';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import AnimatedBackground from './components/AnimatedBackground';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
-import React, { useState, useEffect } from 'react';
+import { pageVariants } from './components/motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const PAGES = [About, Resume, Contact];
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState(0);
+  const ActivePage = PAGES[state];
 
-  const load = () =>{
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // Replace 3000 with the actual time it takes to load your content
-  }
   useEffect(() => {
-    // Simulating the content loading delay with setTimeout
-    setIsLoading(true);
-    load();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [state]);
+
   return (
-    <>
-      <div className={`main page ${isLoading ? 'tilted' : ''}`}>
+    <div className="app-shell">
+      <AnimatedBackground />
+      <div className="main page">
         <Header state={state} setState={setState} />
-        { state === 0 && <About />}
-        { state === 1 && <Resume />}
-        { state === 2 && <Contact />}
-        <Footer/>
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={state}
+            variants={pageVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <ActivePage setState={setState} />
+          </motion.main>
+        </AnimatePresence>
+        <Footer />
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
