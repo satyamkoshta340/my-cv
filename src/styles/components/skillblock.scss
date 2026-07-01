@@ -1,43 +1,49 @@
 .skills-container {
+  margin-top: 1.4rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem 2rem;
+  gap: 0.4rem 2rem;
 }
 
 .skill-item {
-  h5 {
-    font-family: $font-body;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: $text;
-  }
-  span {
-    font-size: 0.78rem;
-    color: $primary-soft;
-    font-weight: 600;
-  }
-  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1ch;
+  font-family: $font-mono;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
-.skill-item-graph {
-  margin-top: 6px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid $glass-border;
-  min-height: 8px;
-  border-radius: 50px;
-  padding: 2px;
-  box-sizing: border-box;
+.skill-name {
+  color: $fg;
+  min-width: 11ch;
 }
-.skil-item-power {
-  height: 6px;
-  border-radius: 50px;
-  background: $grad-primary;
-  box-shadow: 0 0 12px rgba(77, 159, 255, 0.6);
-  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+.skill-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  flex: 1;
+}
+.skill-bracket { color: $fg-faint; }
+.skill-cell {
+  width: 7px;
+  height: 12px;
+  background: $border;
+  border-radius: 1px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+.skill-cell.on {
+  background: $green;
+  box-shadow: 0 0 6px rgba(126, 231, 135, 0.5);
+}
+.skill-pct {
+  color: $cyan;
+  min-width: 4ch;
+  text-align: right;
 }
 
-@media screen and (max-width: 776px) {
+@media screen and (max-width: 768px) {
   .skills-container {
     grid-template-columns: 1fr;
   }
+  .skill-cell { width: 6px; }
 }

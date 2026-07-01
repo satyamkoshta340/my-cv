@@ -1,49 +1,57 @@
-footer {
-  position: absolute;
+.statusbar {
+  position: sticky;
   bottom: 0;
-  left: 0;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1.4rem 3rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: $text-muted;
-  font-size: 0.85rem;
+  gap: 1rem;
+  padding: 0.4rem 1rem;
+  background: $bg-titlebar;
+  border-top: 1px solid $border;
+  font-family: $font-mono;
+  font-size: 0.74rem;
+  color: $fg-dim;
+  flex-wrap: wrap;
 
-  .footer-links {
+  .sb-left, .sb-right {
     display: flex;
-    gap: 1.6rem;
+    align-items: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+  .sb-branch {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: $cyan;
+  }
+  .sb-ok {
+    color: $green;
+    font-size: 0.72rem;
   }
   a {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: $text-muted;
-    transition: color 0.25s ease;
+    gap: 5px;
+    color: $fg-dim;
   }
   a:hover {
-    color: $primary-soft;
+    color: $green;
+    text-decoration: none;
   }
-  .footer-copy {
-    color: $text-dim;
+  .sb-copy { color: $fg-faint; }
+}
+
+@media screen and (max-width: 620px) {
+  .statusbar {
+    font-size: 0.68rem;
+    .sb-ok, .sb-copy { display: none; }
+    .sb-left, .sb-right { gap: 0.8rem; }
   }
 }
 
-@media screen and (max-width: 776px) {
-  footer {
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 1.4rem;
-    text-align: center;
-    .footer-links {
-      gap: 1.2rem;
-    }
-  }
-}
-
-// ── Animated background FX ─────────────────────────
+// ── Terminal background FX ─────────────────────────
 .bg-fx {
   position: fixed;
   inset: 0;
@@ -51,50 +59,49 @@ footer {
   overflow: hidden;
   pointer-events: none;
 }
-.bg-orb {
+.bg-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.5;
+  filter: blur(120px);
+  opacity: 0.4;
 }
-.bg-orb--blue {
+.bg-glow--green {
   width: 34rem;
   height: 34rem;
-  top: -8rem;
-  left: -6rem;
-  background: radial-gradient(circle, rgba(77, 159, 255, 0.55), transparent 70%);
+  top: -10rem;
+  left: -8rem;
+  background: radial-gradient(circle, rgba(126, 231, 135, 0.35), transparent 70%);
+  animation: glow-drift-a 26s ease-in-out infinite;
 }
-.bg-orb--violet {
+.bg-glow--cyan {
   width: 30rem;
   height: 30rem;
-  top: 20%;
+  bottom: -10rem;
   right: -8rem;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent 70%);
+  background: radial-gradient(circle, rgba(86, 212, 221, 0.32), transparent 70%);
+  animation: glow-drift-b 30s ease-in-out infinite;
 }
-.bg-orb--cyan {
-  width: 28rem;
-  height: 28rem;
-  bottom: -8rem;
-  left: 30%;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.4), transparent 70%);
+@keyframes glow-drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(60px, 40px); }
 }
-.bg-grid {
+@keyframes glow-drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-50px, -30px); }
+}
+.bg-scanlines {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 40%, transparent 100%);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 3px
+  );
 }
-.bg-cursor-glow {
+.bg-vignette {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(77, 159, 255, 0.10), transparent 65%);
-  will-change: transform;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 80% at 50% 40%, transparent 55%, rgba(0, 0, 0, 0.45) 100%);
 }

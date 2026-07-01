@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from 'react';
+
+const CELLS = 20;
 
 function SkillBlock({ skillName, skillPower }) {
-  const barRef = useRef(null);
+  const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -15,25 +17,27 @@ function SkillBlock({ skillName, skillPower }) {
       },
       { threshold: 0.3 }
     );
-    if (barRef.current) {
-      observer.observe(barRef.current);
-    }
+    if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
+  const filled = Math.round((skillPower / 100) * CELLS);
+
   return (
-    <div className="skill-item">
-      <div className="row justify-between">
-        <h5>{skillName}</h5>
-        <span>{skillPower}%</span>
-      </div>
-      <div className="skill-item-graph">
-        <div
-          ref={barRef}
-          className="skil-item-power"
-          style={{ width: visible ? `${skillPower}%` : "0%" }}
-        ></div>
-      </div>
+    <div className="skill-item" ref={ref}>
+      <span className="skill-name">{skillName}</span>
+      <span className="skill-bar">
+        <span className="skill-bracket">[</span>
+        {Array.from({ length: CELLS }).map((_, i) => (
+          <span
+            key={i}
+            className={`skill-cell ${visible && i < filled ? 'on' : ''}`}
+            style={{ transitionDelay: `${i * 35}ms` }}
+          />
+        ))}
+        <span className="skill-bracket">]</span>
+      </span>
+      <span className="skill-pct">{skillPower}%</span>
     </div>
   );
 }

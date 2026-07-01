@@ -1,27 +1,17 @@
-.word-rotator {
-  position: relative;
-  height: 2.4rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+.typewriter {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: $font-mono;
 }
-.word-rotator-item {
-  display: inline-block;
-  font-family: $font-display;
-  font-size: 1.5rem;
+.typewriter-text {
+  font-family: $font-mono;
+  font-size: 1.35rem;
   font-weight: 600;
-  background: $grad-primary;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.01em;
+  color: $green;
 }
 
 @media screen and (max-width: 776px) {
-  .word-rotator {
-    justify-content: center;
-  }
-  .word-rotator-item {
-    font-size: 1.25rem;
+  .typewriter-text {
+    font-size: 1.1rem;
   }
 }

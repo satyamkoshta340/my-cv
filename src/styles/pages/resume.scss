@@ -1,142 +1,83 @@
-.main-headline {
-  font-family: $font-display;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 1.5rem 0 3rem;
-  letter-spacing: -0.02em;
-  background: $grad-text;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.page-resume {
+  font-family: $font-mono;
 }
 
-.detail-items {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-.detail-block {
-  min-width: 0;
-}
-
-.head-ic {
-  vertical-align: -2px;
-  margin-right: 8px;
-  color: $primary-soft;
-}
-
-// ── Timeline ──────────────────────────────────────
-.timeline {
+.commit-list {
   position: relative;
-  padding-left: 1.6rem;
+  margin-top: 1.4rem;
+  padding-left: 1.5rem;
 }
-.timeline::before {
+.commit-list::before {
   content: '';
   position: absolute;
-  left: 5px;
-  top: 6px;
-  bottom: 6px;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
   width: 2px;
-  background: linear-gradient(180deg, $primary, rgba(168, 85, 247, 0.5), transparent);
+  background: linear-gradient(180deg, $green, $cyan, transparent);
 }
-.tl-item {
+
+.commit {
   position: relative;
-  padding-bottom: 2rem;
+  padding-bottom: 1.8rem;
 }
-.tl-item-last {
-  padding-bottom: 0.5rem;
-}
-.tl-marker {
+.commit::before {
+  content: '';
   position: absolute;
-  left: -1.6rem;
-  top: 4px;
-  width: 12px;
-  height: 12px;
+  left: -1.5rem;
+  top: 6px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: $grad-primary;
-  box-shadow: 0 0 0 4px rgba(77, 159, 255, 0.15), 0 0 14px rgba(77, 159, 255, 0.7);
+  background: $bg-window;
+  border: 2px solid $green;
+  box-shadow: 0 0 8px rgba(126, 231, 135, 0.6);
 }
-.tl-header {
+
+.commit-line {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 0.4rem;
+  gap: 0.8ch;
+  font-size: 0.98rem;
 }
-.tl-year {
-  font-size: 0.72rem;
+.commit-hash {
+  color: $yellow;
   font-weight: 600;
-  color: $primary-soft;
-  border: 1px solid rgba(77, 159, 255, 0.4);
-  padding: 2px 10px;
-  border-radius: 40px;
-  background: rgba(77, 159, 255, 0.08);
 }
-.tl-org {
-  font-size: 0.85rem;
+.commit-role {
+  color: $fg;
   font-weight: 600;
-  color: $text-muted;
 }
-.tl-role {
-  font-size: 1.12rem;
-  color: $text;
-  margin-bottom: 0.5rem;
+.commit-tag {
+  color: $green;
+  font-size: 0.8rem;
 }
-.tl-points {
+.commit-meta {
+  margin: 0.25rem 0 0.6rem;
+  font-size: 0.82rem;
+  color: $fg-faint;
+}
+.commit-org { color: $cyan; }
+.commit-sep { margin: 0 0.6ch; }
+.commit-date { color: $fg-dim; }
+
+.commit-points {
   margin: 0;
   padding-left: 1.1rem;
   li {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: $text-muted;
-    margin-bottom: 0.5rem;
+    font-size: 0.86rem;
+    line-height: 1.65;
+    color: $fg-dim;
+    margin-bottom: 0.4rem;
   }
-  li::marker {
-    color: $primary;
-  }
+  li::marker { color: $green; }
 }
-.tl-text {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: $text-muted;
-  margin: 0;
+.commit-detail {
+  font-size: 0.86rem;
+  color: $orange;
 }
 
-// ── Project card ──────────────────────────────────
-.project-card {
-  @include glass;
-  border-radius: $radius;
-  padding: 1.4rem 1.5rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  h4 {
-    font-size: 1.05rem;
-    color: $text;
-  }
-}
-.project-card:hover {
-  border-color: rgba(168, 85, 247, 0.45);
-  box-shadow: 0 18px 40px -22px rgba(168, 85, 247, 0.55);
-}
-.project-stack {
-  display: inline-block;
-  margin: 0.4rem 0 0.6rem;
-  font-size: 0.78rem;
-  color: $accent-2;
-  font-weight: 500;
-}
-
-// ── Skills ────────────────────────────────────────
-.skills-block {
-  margin-top: 1rem;
-}
-
-@media screen and (max-width: 776px) {
-  .main-headline {
-    font-size: 2.4rem;
-  }
-  .detail-items {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
+@media screen and (max-width: 768px) {
+  .commit-line { font-size: 0.9rem; }
 }

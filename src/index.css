@@ -1,14 +1,12 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  line-height: 1.65;
   font-weight: 400;
-  color: #eef1f8;
-
+  color: #c9d1d9;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 * {
@@ -23,24 +21,24 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  color: #eef1f8;
-  background-color: #07070d;
+  color: #c9d1d9;
+  background-color: #0a0e14;
   background-image:
-    radial-gradient(60rem 60rem at 78% -10%, rgba(168, 85, 247, 0.18), transparent 60%),
-    radial-gradient(55rem 55rem at 8% 8%, rgba(77, 159, 255, 0.18), transparent 55%),
-    radial-gradient(50rem 50rem at 50% 120%, rgba(34, 211, 238, 0.12), transparent 60%);
+    radial-gradient(50rem 40rem at 85% -10%, rgba(86, 212, 221, 0.08), transparent 60%),
+    radial-gradient(45rem 40rem at 5% 5%, rgba(126, 231, 135, 0.07), transparent 55%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
 a {
   font-weight: 500;
-  color: #7cb8ff;
-  text-decoration: inherit;
-  transition: color 0.2s ease;
+  color: #56d4dd;
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 a:hover {
-  color: #4d9fff;
+  color: #7ee787;
+  text-decoration: underline;
 }
 
 button {
@@ -49,21 +47,23 @@ button {
 }
 
 ::selection {
-  background: rgba(77, 159, 255, 0.35);
+  background: rgba(126, 231, 135, 0.25);
   color: #fff;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #07070d;
+  background: #0a0e14;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4d9fff, #a855f7);
+  background: #30363d;
   border-radius: 10px;
-  border: 2px solid #07070d;
+  border: 2px solid #0a0e14;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d444d;
 }
 
 @media (prefers-reduced-motion: reduce) {

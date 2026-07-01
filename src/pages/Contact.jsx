@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiPhone, FiMapPin, FiMail, FiGithub, FiLinkedin } from 'react-icons/fi';
+import Prompt from '../components/Prompt';
 import { fadeUp, stagger, viewportOnce } from '../components/motion';
+import { FiPhone, FiMail, FiMapPin, FiGithub, FiLinkedin } from 'react-icons/fi';
 
 const INFO = [
-  { Icon: FiPhone, label: 'Call', value: '+91 89798 36655', href: 'tel:+918979836655' },
-  { Icon: FiMail, label: 'Email', value: 'satyamkoshta340@gmail.com', href: 'mailto:satyamkoshta340@gmail.com' },
-  { Icon: FiMapPin, label: 'Location', value: 'Delhi, India', href: null },
-];
-
-const SOCIAL = [
-  { Icon: FiGithub, href: 'https://github.com/satyamkoshta340' },
-  { Icon: FiLinkedin, href: 'https://www.linkedin.com/in/satyamkoshta340/' },
+  { Icon: FiMail, key: 'email', value: 'satyamkoshta340@gmail.com', href: 'mailto:satyamkoshta340@gmail.com' },
+  { Icon: FiPhone, key: 'phone', value: '+91 89798 36655', href: 'tel:+918979836655' },
+  { Icon: FiMapPin, key: 'location', value: 'Delhi, India', href: null },
+  { Icon: FiGithub, key: 'github', value: 'github.com/satyamkoshta340', href: 'https://github.com/satyamkoshta340' },
+  { Icon: FiLinkedin, key: 'linkedin', value: 'linkedin.com/in/satyamkoshta340', href: 'https://www.linkedin.com/in/satyamkoshta340/' },
 ];
 
 function Contact() {
@@ -29,76 +27,61 @@ function Contact() {
   };
 
   return (
-    <div className="resume">
+    <div className="page-contact">
+      <Prompt path="~/contact" command="cat" flags="contact.md" />
       <motion.div
-        className="main-headline"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="contact-info code-block"
+        variants={stagger(0.07)}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
       >
-        Contact
+        {INFO.map(({ Icon, key, value, href }) => (
+          <motion.div className="contact-row" variants={fadeUp} key={key}>
+            <span className="contact-ic"><Icon /></span>
+            <span className="contact-key">{key}</span>
+            <span className="code-colon">=</span>
+            {href ? (
+              <a className="contact-val" href={href} target="_blank" rel="noreferrer">
+                {value}
+              </a>
+            ) : (
+              <span className="contact-val plain">{value}</span>
+            )}
+          </motion.div>
+        ))}
       </motion.div>
 
-      <div className="contact-grid">
-        <motion.div
-          className="contact-info"
-          variants={stagger(0.1)}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-        >
-          <motion.p className="contact-intro" variants={fadeUp}>
-            Have a role, a project, or an idea? I&apos;m open to
-            opportunities and always happy to talk shop.
-          </motion.p>
-
-          {INFO.map(({ Icon, label, value, href }) => (
-            <motion.a
-              key={label}
-              className="contact-card"
-              href={href || undefined}
-              variants={fadeUp}
-              whileHover={{ x: 6 }}
-            >
-              <div className="contact-ic">
-                <Icon />
-              </div>
-              <div>
-                <span className="contact-label">{label}</span>
-                <h3>{value}</h3>
-              </div>
-            </motion.a>
-          ))}
-
-          <motion.div className="contact-social" variants={fadeUp}>
-            {SOCIAL.map(({ Icon, href }, i) => (
-              <a key={i} href={href} target="_blank" rel="noreferrer">
-                <Icon />
-              </a>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="contact-form-wrap"
-          initial={{ opacity: 0, y: 30 }}
+      <div className="term-section">
+        <Prompt path="~/contact" command="./send-message.sh" comment="drop me a line" />
+        <motion.form
+          className="contact-form"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="heading-box">
-            <h2 className="underline-heading">How can I help?</h2>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Full name" required />
-            <input type="email" placeholder="Email address" required />
-            <input type="text" placeholder="Subject" required />
-            <textarea rows={5} placeholder="Your message" required />
-            <button type="submit" className="submit">
-              {sent ? 'Opening your mail app…' : 'Send message'}
-            </button>
-          </form>
-        </motion.div>
+          <label className="field">
+            <span className="field-label">$ name:</span>
+            <input type="text" placeholder="your name" required />
+          </label>
+          <label className="field">
+            <span className="field-label">$ email:</span>
+            <input type="email" placeholder="you@domain.com" required />
+          </label>
+          <label className="field">
+            <span className="field-label">$ subject:</span>
+            <input type="text" placeholder="subject line" required />
+          </label>
+          <label className="field field--area">
+            <span className="field-label">$ message:</span>
+            <textarea rows={5} placeholder="type your message..." required />
+          </label>
+          <button type="submit" className="send-btn">
+            {sent ? '✓ opening mail client...' : '▸ execute send'}
+          </button>
+        </motion.form>
       </div>
     </div>
   );

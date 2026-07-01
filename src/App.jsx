@@ -4,13 +4,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
 import About from './pages/About';
+import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import { pageVariants } from './components/motion';
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const PAGES = [About, Resume, Contact];
+const PAGES = [About, Projects, Resume, Contact];
 
 function App() {
   const [state, setState] = useState(0);
@@ -23,20 +24,22 @@ function App() {
   return (
     <div className="app-shell">
       <AnimatedBackground />
-      <div className="main page">
+      <div className="main">
         <Header state={state} setState={setState} />
-        <AnimatePresence mode="wait">
-          <motion.main
-            key={state}
-            variants={pageVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
-            <ActivePage setState={setState} />
-          </motion.main>
-        </AnimatePresence>
-        <Footer />
+        <div className="terminal-body">
+          <AnimatePresence mode="wait">
+            <motion.main
+              key={state}
+              variants={pageVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <ActivePage setState={setState} />
+            </motion.main>
+          </AnimatePresence>
+        </div>
+        <Footer setState={setState} />
       </div>
     </div>
   );

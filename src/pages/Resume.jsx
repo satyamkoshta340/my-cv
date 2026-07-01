@@ -1,193 +1,136 @@
 /* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
+import Prompt from '../components/Prompt';
 import SkillBlock from '../components/SkillBlock';
-import { fadeUp, scaleIn, stagger, viewportOnce } from '../components/motion';
-import { FiBriefcase, FiBookOpen } from 'react-icons/fi';
-import { HiOutlineSparkles } from 'react-icons/hi2';
+import { fadeUp, stagger, viewportOnce } from '../components/motion';
 
 const EXPERIENCE = [
   {
-    year: 'Sep 2023 – Present',
-    org: 'TCS — Delhi',
+    hash: 'a1f9c2e',
+    date: 'Sep 2023 – Present',
     role: 'System Engineer',
+    org: 'TCS — Delhi',
+    tag: 'current',
     points: [
-      'Architected and deployed a custom OpenID Connect provider with full OAuth 2.0 authorization-server support, enabling enterprise SSO for 600K+ users at 98.9% authentication uptime.',
-      'Led end-to-end cloud migration from Heroku to AWS (ECS, CloudFormation, CloudWatch) with a high-availability, auto-scaling architecture; GitHub Actions CI/CD cut deployment time by 60% (20 → 8 min).',
-      'Built and optimized enterprise-grade healthcare microservices with Node.js, React.js, Python, Redis, PostgreSQL and AWS, improving response times by 25%.',
-      'Engineered a DynamoDB-backed reprocessing pipeline with a 3-attempt retry mechanism and automated incident escalation, reducing registration backlog by 89%.',
-      'Established a test-engineering culture with comprehensive Jest unit/integration suites, reaching 85%+ coverage on authentication flows and core APIs.',
+      'Architected a custom OpenID Connect provider with full OAuth 2.0 authorization-server support — enterprise SSO for 600K+ users at 98.9% uptime.',
+      'Led cloud migration Heroku → AWS (ECS, CloudFormation, CloudWatch); GitHub Actions CI/CD cut deploy time 60% (20 → 8 min).',
+      'Optimized healthcare microservices (Node.js, React, Python, Redis, PostgreSQL, AWS) — 25% faster responses.',
+      'Built a DynamoDB retry pipeline (3-attempt + auto-escalation) — 89% cut in registration backlog.',
+      'Authored Jest unit/integration suites reaching 85%+ coverage on auth flows and core APIs.',
     ],
   },
   {
-    year: 'Oct 2022 – Dec 2022',
+    hash: 'b7d4e10',
+    date: 'Oct 2022 – Dec 2022',
+    role: 'Full Stack Intern',
     org: 'Swarajya — Remote',
-    role: 'Full Stack Intern',
+    tag: null,
     points: [
-      'Developed dynamic, reusable, responsive email templates (HTML/CSS) with cross-client compatibility.',
-      'Built a referral system with automated email integration, increasing newsletter subscriptions by 21%.',
-      'Created a Handlebars.js email-generation system integrated with backend newsletter services for automated, personalized daily communications.',
+      'Built responsive, reusable email templates (HTML/CSS) with cross-client compatibility.',
+      'Shipped a referral system with automated email integration — +21% newsletter subscriptions.',
+      'Created a Handlebars.js email-generation system wired to backend newsletter services.',
     ],
   },
   {
-    year: 'Apr 2022 – Oct 2022',
+    hash: 'c3a8f56',
+    date: 'Apr 2022 – Oct 2022',
+    role: 'Full Stack Intern',
     org: 'Agriday — Remote',
-    role: 'Full Stack Intern',
+    tag: null,
     points: [
-      'Built a React.js platform using React Router and Context API with RESTful backend integration.',
-      'Created scraping scripts that continuously collected data from online sources, enabling near real-time streaming at 90% availability.',
-      'Integrated real-time in-app messaging via Firebase Cloud Messaging for instant user notifications.',
+      'Built a React platform (React Router + Context API) with RESTful backend integration.',
+      'Wrote scraping scripts for near real-time data streaming at 90% availability.',
+      'Integrated real-time in-app messaging via Firebase Cloud Messaging.',
     ],
   },
 ];
 
-const EDUCATION = [
-  {
-    year: 'Jul 2019 – Jul 2023',
-    org: 'FET GKV Haridwar',
-    role: 'B.Tech, Computer Science',
-    text: 'Bachelor of Technology in Computer Science & Engineering. CGPA: 8.8 / 10.0.',
-  },
-];
-
-const PROJECTS = [
-  {
-    title: 'Real-Time Multiplayer Collaboration Platform',
-    stack: 'React · Node · Socket.io · Canvas',
-    points: [
-      'Event-driven multiplayer platform on Socket.io and Node.js supporting concurrent users with low latency.',
-      'Scalable frontend state synchronization with interactive Canvas-based rendering for collaborative sessions.',
-      'Improved UI maintainability and responsiveness with a modular SASS architecture and reusable components.',
-    ],
-  },
-];
+const EDUCATION = {
+  hash: 'e0b1a99',
+  date: 'Jul 2019 – Jul 2023',
+  role: 'B.Tech, Computer Science & Engineering',
+  org: 'FET GKV Haridwar',
+  detail: 'CGPA: 8.8 / 10.0',
+};
 
 const SKILLS = [
-  ['Python', 95], ['C++', 88], ['JavaScript', 92], ['TypeScript', 85],
-  ['React.js', 93], ['Next.js', 82], ['Node.js', 92], ['Express', 90],
-  ['FastAPI', 85], ['PostgreSQL', 88], ['MongoDB', 86], ['Redis', 82],
-  ['AWS', 88], ['Docker', 84], ['Git & CI/CD', 90],
+  ['python', 95], ['javascript', 92], ['react.js', 93], ['node.js', 92],
+  ['typescript', 85], ['fastapi', 85], ['postgresql', 88], ['redis', 82],
+  ['aws', 88], ['docker', 84], ['c++', 88], ['git / ci-cd', 90],
 ];
 
-function TimelineItem({ item, isLast }) {
+function CommitEntry({ item }) {
   return (
-    <motion.div className={`tl-item ${isLast ? 'tl-item-last' : ''}`} variants={fadeUp}>
-      <div className="tl-marker" />
-      <div className="tl-header">
-        <span className="tl-year">{item.year}</span>
-        <span className="tl-org">{item.org}</span>
+    <motion.div className="commit" variants={fadeUp}>
+      <div className="commit-line">
+        <span className="commit-hash">{item.hash}</span>
+        <span className="commit-role">{item.role}</span>
+        {item.tag && <span className="commit-tag">({item.tag})</span>}
       </div>
-      <h4 className="tl-role">{item.role}</h4>
-      {item.points ? (
-        <ul className="tl-points">
+      <div className="commit-meta">
+        <span className="commit-org">{item.org}</span>
+        <span className="commit-sep">·</span>
+        <span className="commit-date">{item.date}</span>
+      </div>
+      {item.points && (
+        <ul className="commit-points">
           {item.points.map((p, i) => (
             <li key={i}>{p}</li>
           ))}
         </ul>
-      ) : (
-        <p className="tl-text">{item.text}</p>
       )}
+      {item.detail && <div className="commit-detail">{item.detail}</div>}
     </motion.div>
   );
 }
 
 function Resume() {
   return (
-    <div className="resume">
+    <div className="page-resume">
+      {/* Experience */}
+      <Prompt path="~/resume" command="git log" flags="--author=satyam" comment="work history" />
       <motion.div
-        className="main-headline"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="commit-list"
+        variants={stagger(0.12)}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
       >
-        Resume
+        {EXPERIENCE.map((item) => (
+          <CommitEntry item={item} key={item.hash} />
+        ))}
       </motion.div>
 
-      <div className="details">
-        <div className="detail-items">
-          {/* Experience */}
-          <div className="detail-block">
-            <div className="heading-box">
-              <h2 className="underline-heading">
-                <FiBriefcase className="head-ic" /> Experience
-              </h2>
-            </div>
-            <motion.div
-              className="timeline"
-              variants={stagger(0.12)}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewportOnce}
-            >
-              {EXPERIENCE.map((item, i) => (
-                <TimelineItem key={item.org} item={item} isLast={i === EXPERIENCE.length - 1} />
-              ))}
-            </motion.div>
-          </div>
+      {/* Education */}
+      <div className="term-section">
+        <Prompt path="~/resume" command="cat" flags="education.log" />
+        <motion.div
+          className="commit-list"
+          variants={stagger(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <CommitEntry item={EDUCATION} />
+        </motion.div>
+      </div>
 
-          {/* Education + Projects */}
-          <div className="detail-block">
-            <div className="heading-box">
-              <h2 className="underline-heading">
-                <FiBookOpen className="head-ic" /> Education
-              </h2>
-            </div>
-            <motion.div
-              className="timeline"
-              variants={stagger(0.12)}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewportOnce}
-            >
-              {EDUCATION.map((item, i) => (
-                <TimelineItem key={item.org} item={item} isLast={i === EDUCATION.length - 1} />
-              ))}
+      {/* Skills */}
+      <div className="term-section">
+        <Prompt path="~/resume" command="./skills.sh" flags="--proficiency" />
+        <motion.div
+          className="skills-container"
+          variants={stagger(0.06)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          {SKILLS.map(([name, power]) => (
+            <motion.div variants={fadeUp} key={name} style={{ width: '100%' }}>
+              <SkillBlock skillName={name} skillPower={power} />
             </motion.div>
-
-            <div className="heading-box" style={{ marginTop: '2.5rem' }}>
-              <h2 className="underline-heading">
-                <HiOutlineSparkles className="head-ic" /> Projects
-              </h2>
-            </div>
-            <motion.div
-              variants={stagger(0.12)}
-              initial="hidden"
-              whileInView="show"
-              viewport={viewportOnce}
-            >
-              {PROJECTS.map((p) => (
-                <motion.div className="project-card" variants={fadeUp} whileHover={{ y: -5 }} key={p.title}>
-                  <h4>{p.title}</h4>
-                  <span className="project-stack">{p.stack}</span>
-                  <ul className="tl-points">
-                    {p.points.map((pt, i) => (
-                      <li key={i}>{pt}</li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Skills */}
-        <div className="skills-block">
-          <div className="heading-box">
-            <h2 className="underline-heading">Skills</h2>
-          </div>
-          <motion.div
-            className="skills-container"
-            variants={stagger(0.05)}
-            initial="hidden"
-            whileInView="show"
-            viewport={viewportOnce}
-          >
-            {SKILLS.map(([name, power]) => (
-              <motion.div variants={scaleIn} key={name} style={{ width: '100%' }}>
-                <SkillBlock skillName={name} skillPower={power} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </div>
     </div>
   );

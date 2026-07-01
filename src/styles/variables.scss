@@ -1,41 +1,54 @@
-// ── Dark glassmorphism design tokens ─────────────────────────
-$primary:        #4d9fff;   // electric blue accent
-$primary-soft:   #7cb8ff;
-$primary-deep:   #2563eb;
-$accent:         #a855f7;   // violet secondary accent
-$accent-2:       #22d3ee;   // cyan tertiary
+// ── Terminal / code-editor design tokens ─────────────
+$bg:            #0a0e14;   // page background
+$bg-window:     #0d1117;   // terminal window body
+$bg-titlebar:   #161b22;   // window title bar
+$bg-inset:      #010409;   // deep inset panels
 
-$bg:             #07070d;   // page background
-$bg-2:           #0c0c16;
-$surface:        rgba(255, 255, 255, 0.04);
-$surface-strong: rgba(255, 255, 255, 0.07);
-$glass-border:   rgba(255, 255, 255, 0.10);
-$glass-border-2: rgba(255, 255, 255, 0.16);
+$fg:            #c9d1d9;   // default text
+$fg-dim:        #8b949e;   // muted text
+$fg-faint:      #6e7681;   // comments / faint
 
-$text:           #eef1f8;
-$text-muted:     #a2a8bd;
-$text-dim:       #6f748a;
+$green:         #7ee787;   // prompt / success / strings
+$cyan:          #56d4dd;   // accents / links
+$blue:          #79c0ff;   // functions / paths
+$purple:        #d2a8ff;   // keywords
+$yellow:        #e3b341;   // params / warnings
+$orange:        #ffa657;   // numbers / constants
+$red:           #ff7b72;   // errors / red dot
 
-$primary-font:   #eef1f8;
-$gray:           #a2a8bd;
-$dark:           #0c0c16;
-$dark-background: #0c0c16;
-$detail-bar:     rgba(255, 255, 255, 0.09);
+$border:        #30363d;
+$border-soft:   #21262d;
 
-$radius:         20px;
-$radius-sm:      14px;
-$shadow-glow:    0 0 40px -8px rgba(77, 159, 255, 0.45);
-$shadow-card:    0 20px 50px -20px rgba(0, 0, 0, 0.65);
+// Legacy aliases (kept so any leftover refs still resolve)
+$primary:       #7ee787;
+$primary-soft:  #56d4dd;
+$secondary:     #8b949e;
+$primary-font:  #c9d1d9;
+$gray:          #8b949e;
+$dark:          #0d1117;
+$dark-background: #0d1117;
+$detail-bar:    #30363d;
+$accent:        #d2a8ff;
+$accent-2:      #56d4dd;
+$text:          #c9d1d9;
+$text-muted:    #8b949e;
+$text-dim:      #6e7681;
+$glass-border:  #30363d;
+$glass-border-2:#3d444d;
+$surface:       #0d1117;
 
-$grad-primary:   linear-gradient(135deg, #4d9fff 0%, #a855f7 100%);
-$grad-text:      linear-gradient(120deg, #eef1f8 0%, #7cb8ff 55%, #a855f7 100%);
+$radius:        10px;
+$radius-sm:     8px;
 
-$font-display:   'Space Grotesk', 'Inter', system-ui, sans-serif;
-$font-body:      'Inter', system-ui, sans-serif;
+$grad-primary:  linear-gradient(90deg, #7ee787, #56d4dd);
+$grad-text:     linear-gradient(90deg, #7ee787 0%, #56d4dd 60%, #79c0ff 100%);
 
-@mixin glass {
-  background: $surface;
-  border: 1px solid $glass-border;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+$font-mono:     'JetBrains Mono', 'SF Mono', 'Fira Code', ui-monospace, monospace;
+$font-display:  'JetBrains Mono', ui-monospace, monospace;
+$font-body:     'JetBrains Mono', ui-monospace, monospace;
+
+@mixin panel {
+  background: $bg-window;
+  border: 1px solid $border;
+  border-radius: $radius;
 }

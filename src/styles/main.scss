@@ -4,6 +4,7 @@
 @import './components/footer.scss';
 @import './components/wordanimation.scss';
 @import './pages/resume.scss';
+@import './pages/projects.scss';
 @import './components/skillblock.scss';
 @import './pages/contact.scss';
 
@@ -27,52 +28,67 @@
 h1, h2, h3, h4, h5 {
   margin: 0;
   padding: 0;
-  font-family: $font-display;
-  letter-spacing: -0.01em;
+  font-family: $font-mono;
+  font-weight: 600;
 }
 
+// ── Shared terminal primitives ────────────────────
+.cmd-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5ch;
+  font-family: $font-mono;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+.cmd-user   { color: $green; }
+.cmd-at     { color: $fg-dim; }
+.cmd-host   { color: $cyan; }
+.cmd-path   { color: $blue; }
+.cmd-symbol { color: $fg-dim; }
+.cmd-text   { color: $fg; }
+.cmd-flag   { color: $yellow; }
+.cmd-comment { color: $fg-faint; font-style: italic; }
+
+.term-out {
+  color: $fg-dim;
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+// Section heading rendered as a "# comment" or command
 .underline-heading {
   position: relative;
   display: inline-block;
-  font-size: 1.6rem;
-  padding-bottom: 12px;
-  color: $text;
-}
-.underline-heading::after {
-  display: block;
-  position: absolute;
-  content: '';
-  width: 42px;
-  background: $grad-primary;
-  height: 3px;
-  border-radius: 3px;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0 0 12px rgba(77, 159, 255, 0.6);
-}
-.underline-heading::before {
-  display: block;
-  position: absolute;
-  content: '';
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.09);
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
+  font-family: $font-mono;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: $fg;
 }
 .heading-box {
   position: relative;
   width: fit-content;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.3rem;
 }
-
 .section-eyebrow {
   display: inline-block;
-  font-family: $font-body;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: $primary-soft;
-  margin-bottom: 0.5rem;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  color: $fg-faint;
+  margin-bottom: 0.3rem;
+}
+
+.blink-cursor {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.05em;
+  transform: translateY(0.15em);
+  background: $green;
+  margin-left: 2px;
+  animation: term-blink 1s steps(2, start) infinite;
+}
+@keyframes term-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
 }

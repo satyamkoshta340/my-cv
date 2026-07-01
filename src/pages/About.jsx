@@ -1,211 +1,142 @@
-/* eslint-disable react/prop-types */
 import { motion } from 'framer-motion';
-import ApiIcon from '@mui/icons-material/Api';
-import HubIcon from '@mui/icons-material/Hub';
-import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import WordAnimation from '../components/WordAnimation';
+import Prompt from '../components/Prompt';
+import Typewriter from '../components/Typewriter';
 import Counter from '../components/Counter';
-import { fadeUp, scaleIn, stagger, viewportOnce } from '../components/motion';
-import { TbBrandCpp, TbBrandTypescript } from 'react-icons/tb';
-import { FaPython, FaNode, FaReact, FaGit, FaAws, FaDocker, FaGithub, FaLinkedin } from 'react-icons/fa';
-import {
-  SiJavascript, SiMongodb, SiMysql, SiPostgresql, SiRedis,
-  SiRedux, SiExpress, SiNextdotjs, SiFastapi, SiJest,
-} from 'react-icons/si';
-import satyamBackground from '../assets/satyam.jpeg';
+import { fadeUp, stagger, viewportOnce } from '../components/motion';
 import satyamKoshtaResume from '../assets/SatyamKoshtaResume.pdf';
 
-const WHAT_I_DO = [
-  {
-    Icon: VerifiedUserIcon,
-    title: 'Auth & Identity',
-    text: 'Architected an enterprise OIDC/SSO provider with full OAuth 2.0 authorization-server support, serving 600K+ users at 98.9% uptime.',
-  },
-  {
-    Icon: CloudSyncIcon,
-    title: 'Cloud & DevOps',
-    text: 'Led cloud migration to AWS (ECS, CloudFormation, CloudWatch) and built GitHub Actions CI/CD pipelines that cut deployment time by 60%.',
-  },
-  {
-    Icon: HubIcon,
-    title: 'Distributed Systems',
-    text: 'Design resilient microservices and retry pipelines with Node.js, Python, Redis, PostgreSQL and DynamoDB — cutting registration backlog by 89%.',
-  },
-  {
-    Icon: ApiIcon,
-    title: 'Frontend Craft',
-    text: 'Deliver polished, accessible React.js interfaces with clean state management and modular SASS architecture for maintainable UIs.',
-  },
+const ROLES = ['Full-Stack Engineer', 'Backend Systems', 'React Specialist', 'Cloud & DevOps'];
+
+const WHOAMI = [
+  ['name', '"Satyam Koshta"', 'string'],
+  ['experience', '"3+ years"', 'string'],
+  ['focus', '["distributed-systems", "auth", "cloud"]', 'array'],
+  ['scale', '"600K+ users @ 98.9% uptime"', 'string'],
+  ['location', '"Delhi, India"', 'string'],
+  ['status', '"open to opportunities"', 'string'],
 ];
 
-const SKILLS = [
-  { Icon: FaPython, name: 'Python' },
-  { Icon: TbBrandCpp, name: 'C++' },
-  { Icon: SiJavascript, name: 'JavaScript' },
-  { Icon: TbBrandTypescript, name: 'TypeScript' },
-  { Icon: FaReact, name: 'React' },
-  { Icon: SiNextdotjs, name: 'Next.js' },
-  { Icon: SiRedux, name: 'Redux' },
-  { Icon: FaNode, name: 'Node.js' },
-  { Icon: SiExpress, name: 'Express' },
-  { Icon: SiFastapi, name: 'FastAPI' },
-  { Icon: SiJest, name: 'Jest' },
-  { Icon: SiPostgresql, name: 'PostgreSQL' },
-  { Icon: SiMysql, name: 'MySQL' },
-  { Icon: SiMongodb, name: 'MongoDB' },
-  { Icon: SiRedis, name: 'Redis' },
-  { Icon: FaAws, name: 'AWS' },
-  { Icon: FaDocker, name: 'Docker' },
-  { Icon: FaGit, name: 'Git' },
-];
+const SKILLS = {
+  languages: ['Python', 'C++', 'JavaScript', 'TypeScript'],
+  frameworks: ['FastAPI', 'Node.js', 'Express', 'React.js', 'Next.js', 'Redux', 'Jest'],
+  databases: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis'],
+  cloud_devops: ['AWS', 'ECS', 'Lambda', 'CloudFormation', 'Docker', 'GitHub Actions', 'CI/CD'],
+};
 
 const STATS = [
-  { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 600, suffix: 'K+', label: 'Users Served' },
-  { value: 98.9, suffix: '%', label: 'Auth Uptime', decimals: 1 },
-  { value: 85, suffix: '%+', label: 'Test Coverage' },
+  { value: 3, suffix: '+', label: 'years_exp' },
+  { value: 600, suffix: 'K+', label: 'users_served' },
+  { value: 98.9, suffix: '%', label: 'auth_uptime', decimals: 1 },
+  { value: 85, suffix: '%+', label: 'test_coverage' },
 ];
 
-function About({ setState }) {
+function About() {
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section className="hero row align_center justify_center">
-        <motion.div
-          className="hero-copy"
-          variants={stagger(0.12)}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.span className="hero-hi" variants={fadeUp}>
-            👋 Hi, I&apos;m
-          </motion.span>
-          <motion.h1 className="hero-name" variants={fadeUp}>
-            Satyam Koshta
-          </motion.h1>
-          <motion.div variants={fadeUp}>
-            <WordAnimation />
-          </motion.div>
-          <motion.p className="hero-summary" variants={fadeUp}>
-            Full-Stack Engineer with 3+ years owning end-to-end product
-            development across distributed backend systems and high-performance
-            frontend interfaces — including a production OIDC/SSO provider
-            serving 600K+ users.
-          </motion.p>
-          <motion.div className="row button-row" variants={fadeUp}>
-            <a href={satyamKoshtaResume} download="SatyamKoshta_CV.pdf">
-              <button className="button-main">Download CV</button>
-            </a>
-            <button className="button-ghost" onClick={() => setState(2)}>
-              Get in touch
-            </button>
-          </motion.div>
-          <motion.div className="row hero-socials" variants={fadeUp}>
-            <a href="https://github.com/satyamkoshta340" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <FaGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/satyamkoshta340/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <FaLinkedin />
-            </a>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="hero-photo"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        >
-          <motion.div
-            className="hero-photo-ring"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-          />
-          <div
-            className="hero-photo-img"
-            style={{ backgroundImage: `url(${satyamBackground})` }}
-          />
-        </motion.div>
-      </section>
-
-      {/* ── Stats ────────────────────────────────────── */}
+    <div className="page-about">
+      {/* whoami */}
+      <Prompt path="~" command="whoami" />
       <motion.div
-        className="stats-row"
-        variants={stagger(0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={viewportOnce}
+        className="hero-block"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        {STATS.map((s) => (
-          <motion.div className="stat-card" variants={scaleIn} key={s.label}>
-            <div className="stat-value">
-              <Counter value={s.value} decimals={s.decimals || 0} />
-              <span className="stat-suffix">{s.suffix}</span>
-            </div>
-            <div className="stat-label">{s.label}</div>
-          </motion.div>
-        ))}
+        <h1 className="hero-name">Satyam Koshta</h1>
+        <div className="hero-role">
+          <span className="hero-arrow">$</span>
+          <Typewriter words={ROLES} />
+        </div>
       </motion.div>
 
-      {/* ── What I Do ────────────────────────────────── */}
-      <section className="wid-container">
-        <div className="heading-box">
-          <span className="section-eyebrow">Capabilities</span>
-          <h2 className="underline-heading">What I Do</h2>
-        </div>
+      {/* cat about.json */}
+      <div className="term-section">
+        <Prompt path="~" command="cat" flags="about.json" />
         <motion.div
-          className="wid-blocks"
+          className="code-block"
+          variants={stagger(0.06)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <div className="code-brace">{'{'}</div>
+          {WHOAMI.map(([key, val]) => (
+            <motion.div className="code-row" variants={fadeUp} key={key}>
+              <span className="code-key">&quot;{key}&quot;</span>
+              <span className="code-colon">:</span>
+              <span className="code-val">{val}</span>
+              <span className="code-comma">,</span>
+            </motion.div>
+          ))}
+          <div className="code-brace">{'}'}</div>
+        </motion.div>
+      </div>
+
+      {/* summary */}
+      <div className="term-section">
+        <Prompt path="~" command="cat" flags="summary.txt" />
+        <p className="term-out summary-out">
+          Full-Stack Engineer with 3+ years owning end-to-end product development
+          across distributed backend systems and high-performance frontend
+          interfaces. Built a production OIDC/SSO provider serving 600K+ users,
+          led cloud migrations to AWS, and drives measurable reliability and
+          performance gains through CI/CD automation and rigorous testing.
+        </p>
+      </div>
+
+      {/* stats */}
+      <div className="term-section">
+        <Prompt path="~" command="./stats.sh" comment="career metrics" />
+        <motion.div
+          className="stats-row"
           variants={stagger(0.1)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
-          {WHAT_I_DO.map(({ Icon, title, text }) => (
-            <motion.div
-              className="wid-block"
-              variants={fadeUp}
-              whileHover={{ y: -6 }}
-              key={title}
-            >
-              <div className="wid-icon">
-                <Icon sx={{ fontSize: 30 }} />
+          {STATS.map((s) => (
+            <motion.div className="stat-card" variants={fadeUp} key={s.label}>
+              <div className="stat-value">
+                <Counter value={s.value} decimals={s.decimals || 0} />
+                <span className="stat-suffix">{s.suffix}</span>
               </div>
-              <div className="wid-block-detail">
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </div>
+              <div className="stat-label">{s.label}</div>
             </motion.div>
           ))}
         </motion.div>
-      </section>
+      </div>
 
-      {/* ── Skills ───────────────────────────────────── */}
-      <section className="wid-container">
-        <div className="heading-box">
-          <span className="section-eyebrow">Toolbox</span>
-          <h2 className="underline-heading">Key Skills</h2>
-        </div>
+      {/* skills */}
+      <div className="term-section">
+        <Prompt path="~/skills" command="ls" flags="-la" />
         <motion.div
-          className="skill-grid"
-          variants={stagger(0.05)}
+          className="skill-tree"
+          variants={stagger(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
-          {SKILLS.map(({ Icon, name }) => (
-            <motion.div
-              className="skill-chip"
-              variants={scaleIn}
-              whileHover={{ y: -5, scale: 1.05 }}
-              key={name}
-            >
-              <Icon className="skill-icon" />
-              <span>{name}</span>
+          {Object.entries(SKILLS).map(([group, items]) => (
+            <motion.div className="skill-group" variants={fadeUp} key={group}>
+              <div className="skill-group-name">
+                <span className="dir-icon">drwx</span> {group}/
+              </div>
+              <div className="skill-chips">
+                {items.map((it) => (
+                  <span className="skill-chip" key={it}>{it}</span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </motion.div>
-      </section>
+      </div>
+
+      {/* download */}
+      <div className="term-section">
+        <Prompt path="~" command="curl -O" flags="resume.pdf" />
+        <a href={satyamKoshtaResume} download="SatyamKoshta_CV.pdf" className="dl-btn">
+          <span className="dl-progress">100%</span> ⬇ download résumé
+        </a>
+      </div>
     </div>
   );
 }

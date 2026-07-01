@@ -2,60 +2,59 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const NAV = ['About', 'Resume', 'Contact'];
+const TABS = [
+  { label: 'about', file: 'about.sh' },
+  { label: 'projects', file: 'projects.json' },
+  { label: 'resume', file: 'resume.log' },
+  { label: 'contact', file: 'contact.md' },
+];
 
 function Header({ state, setState }) {
   const [nav, setNav] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setNav(false);
   }, [state]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <motion.header
-      id="main_header"
-      initial={{ opacity: 0, y: -24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`header ${nav ? 'active' : ''} ${scrolled ? 'scrolled' : ''}`}
-    >
-      <div className="logo" onClick={() => setState(0)}>
-        <a>
-          <div className="logo_symbol">S</div>
-          <div className="logo_text">
-            Satyam <span>Koshta</span>
-          </div>
-        </a>
+    <header className="term-chrome">
+      {/* Title bar with traffic lights */}
+      <div className="titlebar">
+        <div className="lights">
+          <span className="light light--red" />
+          <span className="light light--yellow" />
+          <span className="light light--green" />
+        </div>
+        <div className="titlebar-title">
+          satyam@portfolio: <span className="tb-path">~/{TABS[state].label}</span>
+        </div>
+        <div className="titlebar-shell">zsh</div>
+        <button
+          className={`nav-toggle ${nav ? 'active' : ''}`}
+          onClick={() => setNav(!nav)}
+          aria-label="Toggle navigation"
+        >
+          <span /><span /><span />
+        </button>
       </div>
 
-      <div className="nav-button" onClick={() => setNav(!nav)}>
-        <div className={`first ${nav ? 'active' : ''}`}></div>
-        <div className={`second ${nav ? 'active' : ''}`}></div>
-        <div className={`third ${nav ? 'active' : ''}`}></div>
-      </div>
-
-      <nav className={`main_nav ${nav ? 'active' : ''}`}>
-        {NAV.map((label, i) => (
-          <div
-            key={label}
-            className={`main_nav_item ${state === i ? 'current_item' : ''}`}
+      {/* Editor-style tab bar */}
+      <nav className={`tabbar ${nav ? 'active' : ''}`}>
+        {TABS.map((tab, i) => (
+          <button
+            key={tab.label}
+            className={`tab ${state === i ? 'active' : ''}`}
             onClick={() => setState(i)}
           >
-            {label}
+            <span className="tab-dot" />
+            {tab.file}
             {state === i && (
-              <motion.span layoutId="nav-underline" className="nav-underline" />
+              <motion.span layoutId="tab-underline" className="tab-underline" />
             )}
-          </div>
+          </button>
         ))}
       </nav>
-    </motion.header>
+    </header>
   );
 }
 
